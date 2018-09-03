@@ -53,29 +53,29 @@ public class PlayerControl : MonoBehaviour
 	void FixedUpdate ()
 	{
 		// Cache the horizontal input.
-		float h = Input.GetAxis("Horizontal");
+		//float h = Input.GetAxis("Horizontal");
 
-		// The Speed animator parameter is set to the absolute value of the horizontal input.
-		//anim.SetFloat("Speed", Mathf.Abs(h));
+		//// The Speed animator parameter is set to the absolute value of the horizontal input.
+		////anim.SetFloat("Speed", Mathf.Abs(h));
 
-		// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-		if(h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
-			// ... add a force to the player.
-			GetComponent<Rigidbody2D>().AddForce(Vector2.right * h * moveForce);
+		//// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
+		//if(h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
+		//	// ... add a force to the player.
+		//	GetComponent<Rigidbody2D>().AddForce(Vector2.right * h * moveForce);
 
-		// If the player's horizontal velocity is greater than the maxSpeed...
-		if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
-			// ... set the player's velocity to the maxSpeed in the x axis.
-			GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+		//// If the player's horizontal velocity is greater than the maxSpeed...
+		//if(Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
+		//	// ... set the player's velocity to the maxSpeed in the x axis.
+		//	GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
-		// If the input is moving the player right and the player is facing left...
-		if(h > 0 && !facingRight)
-			// ... flip the player.
-			Flip();
-		// Otherwise if the input is moving the player left and the player is facing right...
-		else if(h < 0 && facingRight)
-			// ... flip the player.
-			Flip();
+		//// If the input is moving the player right and the player is facing left...
+		//if(h > 0 && !facingRight)
+		//	// ... flip the player.
+		//	Flip();
+		//// Otherwise if the input is moving the player left and the player is facing right...
+		//else if(h < 0 && facingRight)
+			//// ... flip the player.
+			//Flip();
             
 	}
 	
@@ -152,25 +152,43 @@ public class PlayerControl : MonoBehaviour
         {
             //获取摇杆的方向
 
-            Vector3 dir = new Vector3(h, 0, 0);
+            //Vector3 dir = new Vector3(h, 0, 0);
 
-            //把方向转换到相机的坐标系中
+            ////把方向转换到相机的坐标系中
 
-            dir = Camera.main.transform.TransformDirection(dir);
+            //dir = Camera.main.transform.TransformDirection(dir);
 
-            //方向的y轴值始终设为0
+            ////方向的y轴值始终设为0
 
-            dir.y = 0;
+            //dir.y = 0;
 
-            //把方向向量归一化
+            ////把方向向量归一化
 
-            dir.Normalize();
+            //dir.Normalize();
 
-            //指定一个4倍的向量
+            ////指定一个4倍的向量
 
-            Vector3 sp = dir / 10;
+            //Vector3 sp = dir / 10;
 
-            this.transform.position += sp;
+            //this.transform.position += sp;
+
+            if (h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
+                // ... add a force to the player.
+                GetComponent<Rigidbody2D>().AddForce(Vector2.right * h * moveForce);
+
+            // If the player's horizontal velocity is greater than the maxSpeed...
+            if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
+                // ... set the player's velocity to the maxSpeed in the x axis.
+                GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+
+            // If the input is moving the player right and the player is facing left...
+            if (h > 0 && !facingRight)
+                // ... flip the player.
+                Flip();
+            // Otherwise if the input is moving the player left and the player is facing right...
+            else if (h < 0 && facingRight)
+                // ... flip the player.
+                Flip();
         }
     }
 }
