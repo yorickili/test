@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{1D48E005-C429-5869-3CDD-B3E47C500410}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shaders/SpriteMask.shader">
+    <Files>
+      <File FileName="Assets/Scripts/ParticleWave.cs" Line="23" Column="7" />
+      <File FileName="Assets/Scripts/PlayerControl.cs" Line="15" Column="31" />
+      <File FileName="Assets/Scripts/Gun.cs" Line="46" Column="15" />
+      <File FileName="Assets/Scripts/PlayerHealth.cs" Line="23" Column="3" />
+      <File FileName="Assets/Scripts/FogWeather.cs" Line="19" Column="76" />
+      <File FileName="Assets/Scripts/MaskFollow.cs" Line="19" Column="1" />
+      <File FileName="Assets/Scripts/LightCamera.cs" Line="49" Column="7" />
+      <File FileName="Assets/Shaders/LightCamera.shader" Line="11" Column="40" />
+      <File FileName="Assets/Scripts/SetBlackBGTransform.cs" Line="18" Column="1" />
+      <File FileName="Assets/Shaders/BlackBackground.shader" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/NeonController.cs" Line="29" Column="9" />
+      <File FileName="Assets/Shaders/SpriteMask.shader" Line="5" Column="40" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
