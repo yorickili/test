@@ -20,26 +20,33 @@ public class PlayerControl : MonoBehaviour
 
 	private int tauntIndex;					// The index of the taunts array indicating the most recent taunt.
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
-	private bool grounded = false;			// Whether or not the player is grounded.
-	//private Animator anim;					// Reference to the player's animator component.
+	private bool grounded = false;          // Whether or not the player is grounded.
+                                            //private Animator anim;					// Reference to the player's animator component.
+
+    private ETCJoystick moveJoystic;
 
 
-	void Awake()
+    void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
 		//anim = GetComponent<Animator>();
 	}
 
+    void Start()
+    {
+        moveJoystic = ETCInput.GetControlJoystick("New Joystick");
+    }
 
-	void Update()
+    void Update()
 	{
-		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-        
-		// If the jump button is pressed and the player is grounded then the player should jump.
-        if(Input.GetButtonDown("Jump") && grounded)
-			jump = true;
+        // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
+        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+
+        // If the jump button is pressed and the player is grounded then the player should jump.
+        Move();
+        if (Input.GetButtonDown("Jump"))
+            Jump();
 	}
 
 
@@ -69,23 +76,7 @@ public class PlayerControl : MonoBehaviour
 		else if(h < 0 && facingRight)
 			// ... flip the player.
 			Flip();
-
-		// If the player should jump...
-		if(jump)
-		{
-			// Set the Jump animator trigger parameter.
-			//anim.SetTrigger("Jump");
-
-			// Play a random jump audio clip.
-			//int i = Random.Range(0, jumpClips.Length);
-			//AudioSource.PlayClipAtPoint(jumpClips[i], transform.position);
-
-			// Add a vertical force to the player.
-			GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
-
-			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
-			jump = false;
-		}
+            
 	}
 	
 	
@@ -143,5 +134,43 @@ public class PlayerControl : MonoBehaviour
         Vector3 WavePosition = new Vector3(this.transform.position.x, this.transform.position.y, 6);
         Instantiate(Wave, WavePosition, this.transform.rotation);
 	}
-	
+
+    public void Jump ()
+    {
+        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        if (grounded)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+        }
+    }
+
+    public void Move()
+    {
+        float h = moveJoystic.axisX.axisValue;
+
+        if (h != 0)
+        {
+            //获取摇杆的方向
+
+            Vector3 dir = new Vector3(h, 0, 0);
+
+            //把方向转换到相机的坐标系中
+
+            dir = Camera.main.transform.TransformDirection(dir);
+
+            //方向的y轴值始终设为0
+
+            dir.y = 0;
+
+            //把方向向量归一化
+
+            dir.Normalize();
+
+            //指定一个4倍的向量
+
+            Vector3 sp = dir / 10;
+
+            this.transform.position += sp;
+        }
+    }
 }
