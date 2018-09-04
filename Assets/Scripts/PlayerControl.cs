@@ -25,12 +25,15 @@ public class PlayerControl : MonoBehaviour
 
     private ETCJoystick moveJoystic;
 
+    private PlayerHealth playerHealth;
+
 
     void Awake()
 	{
 		// Setting up references.
 		groundCheck = transform.Find("groundCheck");
-		//anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
+        playerHealth = GetComponent<PlayerHealth>();
 	}
 
     void Start()
@@ -131,8 +134,18 @@ public class PlayerControl : MonoBehaviour
 
 	public void AddWave ()
 	{
-        Vector3 WavePosition = new Vector3(this.transform.position.x, this.transform.position.y, 6);
-        Instantiate(Wave, WavePosition, this.transform.rotation);
+        if (playerHealth.nowhealth > playerHealth.waveCost)   //当前电量大于发波所需电量
+        {
+            Vector3 WavePosition = new Vector3(this.transform.position.x, this.transform.position.y, 6);
+            Instantiate(Wave, WavePosition, this.transform.rotation);
+            playerHealth.WaveReduceHealth();
+            print("发波后 nowhealth="+playerHealth.nowhealth);
+
+        }
+        else
+        {
+            print("发波失败 nowhealth=" + playerHealth.nowhealth);
+        }
 	}
 
     public void Jump ()
