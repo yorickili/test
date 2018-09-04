@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - LightCamera
   - BlackBG
+  - Enemy
+  - HealthBar
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Neon
   - Ground
   - Fog
-  - 
+  - Props
   - 
   - 
   - 
@@ -50,4 +52,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1966588515
+    locked: 0
+  - name: fore
+    uniqueID: 664463377
     locked: 0

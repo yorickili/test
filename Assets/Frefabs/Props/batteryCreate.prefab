@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4524196620788580}
   - component: {fileID: 50037688842484502}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: batteryCreate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 61699178389426150}
   - component: {fileID: 58393737302358852}
   - component: {fileID: 114825105222727332}
-  m_Layer: 11
+  m_Layer: 13
   m_Name: create
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBonus: 10
-  collect: {fileID: 8300000, guid: fdcf63a3454d74ea5bdd46db131f3078, type: 3}
   staytime: 2
 --- !u!212 &212245185402598952
 SpriteRenderer:

@@ -9,13 +9,13 @@ public class BatteryPickup : MonoBehaviour
     public float staytime=5f;                  //staytime
 
 
-    private PickupSpawner pickupSpawner;    // Reference to the pickup spawner.
+   // private PickupSpawner pickupSpawner;    // Reference to the pickup spawner.
     //private Animator anim;                  // Reference to the animator component.
     private bool landed;					// Whether or not the crate has landed.
 
     private void Awake()
     {
-        pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
+       // pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
         //anim = transform.root.GetComponent<Animator>();
     }
 
@@ -52,7 +52,7 @@ public class BatteryPickup : MonoBehaviour
             gameObject.AddComponent<Rigidbody2D>();
             landed = true;
 
-            Destroy(gameObject, staytime);
+           // Destroy(gameObject, staytime);
         }
     }
 

@@ -106,7 +106,7 @@ public class PlayerHealth : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         // If the colliding gameobject is an Enemy...
-        if (col.gameObject.name == "env_neon_ci")  //立即掉血
+        if (col.gameObject.name == "obstacle_ stab")  //立即掉血
         {
             
             // ... and if the time exceeds the time of the last hit plus the time between hits...

@@ -8,7 +8,7 @@ public class HealthPickup : MonoBehaviour
     public float staytime = 2f;                  //staytime
 
 
-    private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
+   // private PickupSpawner pickupSpawner;	// Reference to the pickup spawner.
 	//private Animator anim;					// Reference to the animator component.
 	private bool landed;					// Whether or not the crate has landed.
 
@@ -16,7 +16,7 @@ public class HealthPickup : MonoBehaviour
 	void Awake ()
 	{
 		// Setting up the references.
-		pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
+		//pickupSpawner = GameObject.Find("pickupManager").GetComponent<PickupSpawner>();
 		//anim = transform.root.GetComponent<Animator>();
 	}
 
@@ -57,7 +57,7 @@ public class HealthPickup : MonoBehaviour
 			gameObject.AddComponent<Rigidbody2D>();
 			landed = true;
 
-            Destroy(gameObject, staytime);
+           // Destroy(gameObject, staytime);
 		}
 	}
 }

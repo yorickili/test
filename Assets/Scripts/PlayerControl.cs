@@ -150,6 +150,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Jump ()
     {
+        print(grounded);
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
         if (grounded)
         {
