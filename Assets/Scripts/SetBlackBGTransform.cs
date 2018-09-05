@@ -14,4 +14,8 @@ public class SetBlackBGTransform : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void PassLevelAnimation() {
+        GameObject.FindGameObjectWithTag("BlackBG").SetActive(false);
+    }
 }

@@ -10,6 +10,7 @@ TagManager:
   - BlackBG
   - Enemy
   - HealthBar
+  - Pass
   layers:
   - Default
   - TransparentFX
