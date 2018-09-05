@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -23,7 +24,9 @@ public class PlayerControl : MonoBehaviour
 	private bool grounded = false;          // Whether or not the player is grounded.
                                             //private Animator anim;					// Reference to the player's animator component.
 
-    private ETCJoystick moveJoystic;
+    private ETCTouchPad moveJoystic;
+    private ETCTouchPad touchPad;
+    private DateTime touchTime;
 
     private PlayerHealth playerHealth;
 
@@ -38,7 +41,7 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        moveJoystic = ETCInput.GetControlJoystick("New Joystick");
+        moveJoystic = ETCInput.GetControlTouchPad("Joystick");
     }
 
     void Update()
@@ -203,6 +206,20 @@ public class PlayerControl : MonoBehaviour
             else if (h < 0 && facingRight)
                 // ... flip the player.
                 Flip();
+        }
+    }
+
+    public void TouchStart()
+    {
+        touchTime = DateTime.Now;
+    }
+
+    public void TouchEnd()
+    {
+        long time = (long)(DateTime.Now - touchTime).TotalMilliseconds;
+        if (time < 200)
+        {
+            AddWave();
         }
     }
 }

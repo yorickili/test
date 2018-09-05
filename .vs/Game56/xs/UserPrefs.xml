@@ -1,9 +1,8 @@
-﻿<Properties StartupConfiguration="{1D48E005-C429-5869-3CDD-B3E47C500410}|">
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Shaders/SpriteMask.shader">
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerControl.cs">
     <Files>
       <File FileName="Assets/Scripts/ParticleWave.cs" Line="23" Column="7" />
-      <File FileName="Assets/Scripts/PlayerControl.cs" Line="15" Column="31" />
+      <File FileName="Assets/Scripts/PlayerControl.cs" Line="216" Column="5" />
       <File FileName="Assets/Scripts/Gun.cs" Line="46" Column="15" />
       <File FileName="Assets/Scripts/PlayerHealth.cs" Line="23" Column="3" />
       <File FileName="Assets/Scripts/FogWeather.cs" Line="19" Column="76" />
