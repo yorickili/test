@@ -298,7 +298,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4759906643664388, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1176914618210882, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_IsActive
@@ -618,7 +618,7 @@ Transform:
   - {fileID: 246431646}
   - {fileID: 454168220}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &335151459 stripped
 GameObject:
@@ -866,7 +866,7 @@ RectTransform:
   - {fileID: 1573743890}
   - {fileID: 1168377549}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1879,7 +1879,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &771708174
 MonoBehaviour:
@@ -1940,7 +1940,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &826323121 stripped
 Transform:
@@ -2066,7 +2066,7 @@ Prefab:
     - target: {fileID: 224910219925193882, guid: 970e382d07f61384c83c88df55ec510a,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -340
       objectReference: {fileID: 0}
     - target: {fileID: 224910219925193882, guid: 970e382d07f61384c83c88df55ec510a,
         type: 2}
@@ -2086,7 +2086,7 @@ Prefab:
     - target: {fileID: 224910219925193882, guid: 970e382d07f61384c83c88df55ec510a,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224910219925193882, guid: 970e382d07f61384c83c88df55ec510a,
         type: 2}
@@ -2096,7 +2096,7 @@ Prefab:
     - target: {fileID: 224910219925193882, guid: 970e382d07f61384c83c88df55ec510a,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224910219925193882, guid: 970e382d07f61384c83c88df55ec510a,
         type: 2}
@@ -2193,7 +2193,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4795958563103454, guid: 75a2f93c6f606844680773fe1fcf289e, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1810202146094880, guid: 75a2f93c6f606844680773fe1fcf289e, type: 2}
       propertyPath: m_Name
@@ -2361,7 +2361,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1160733606
 Prefab:
@@ -2591,13 +2591,13 @@ MonoBehaviour:
   isOnDrag: 0
   isSwipeIn: 0
   isSwipeOut: 0
-  showPSInspector: 1
+  showPSInspector: 0
   showSpriteInspector: 0
   showEventInspector: 0
   showBehaviourInspector: 0
   showAxesInspector: 0
   showTouchEventInspector: 0
-  showDownEventInspector: 0
+  showDownEventInspector: 1
   showPressEventInspector: 0
   showCameraInspector: 0
   onMoveStart:
@@ -2622,12 +2622,34 @@ MonoBehaviour:
       PublicKeyToken=null
   onTouchStart:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 20949316}
+        m_MethodName: JoystickOnTouchStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ETCTouchPad+OnTouchStartHandler, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   onTouchUp:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 20949316}
+        m_MethodName: JoystickOnTouchEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ETCTouchPad+OnTouchUPHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnDownUp:
@@ -2642,12 +2664,34 @@ MonoBehaviour:
       PublicKeyToken=null
   OnDownLeft:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 20949316}
+        m_MethodName: MoveLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ETCTouchPad+OnDownLeftHandler, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
   OnDownRight:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 20949316}
+        m_MethodName: MoveRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: ETCTouchPad+OnDownRightHandler, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   OnPressUp:
@@ -2948,7 +2992,7 @@ Transform:
   m_Children:
   - {fileID: 1184959917}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1204303891
 MonoBehaviour:
@@ -3427,7 +3471,7 @@ Transform:
   - {fileID: 417977653}
   - {fileID: 1596449534}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1573743889
 GameObject:
@@ -3548,7 +3592,7 @@ MonoBehaviour:
   showAxesInspector: 0
   showTouchEventInspector: 1
   showDownEventInspector: 1
-  showPressEventInspector: 0
+  showPressEventInspector: 1
   showCameraInspector: 0
   onMoveStart:
     m_PersistentCalls:
@@ -3790,7 +3834,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4699855553063202, guid: 7b03df9b203e6f34d9ba02923bbb6970, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 1459704994710548, guid: 7b03df9b203e6f34d9ba02923bbb6970, type: 2}
       propertyPath: m_Name
@@ -3959,7 +4003,7 @@ Transform:
   - {fileID: 1628943688}
   - {fileID: 1779782574}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1779782574 stripped
 Transform:
@@ -4298,7 +4342,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1798428779
 CapsuleCollider2D:
@@ -4415,7 +4459,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4699855553063202, guid: 7b03df9b203e6f34d9ba02923bbb6970, type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 1459704994710548, guid: 7b03df9b203e6f34d9ba02923bbb6970, type: 2}
       propertyPath: m_Name
@@ -4513,7 +4557,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1961099241 stripped
 Transform:
@@ -4635,7 +4679,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b507e9c618741ba41887aba54f67e6d5, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b507e9c618741ba41887aba54f67e6d5, type: 2}
       propertyPath: m_LocalScale.x
