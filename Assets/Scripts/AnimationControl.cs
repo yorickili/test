@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class AnimationControl : MonoBehaviour {
 
-    public Sprite[] Sprites;
     public float speed = 0.1f;
-    public bool forward = true;
+    public Sprite[] originSprite;
+    public Sprite[] walkSprites;
+    public Sprite[] deathSprites;
 
+    private Sprite[] nowSprites;
+    //private bool forward = true;
     private SpriteRenderer spriteRenderer;
     private int nowIndex = 0;
     private float time = 0.0f;
@@ -15,28 +18,48 @@ public class AnimationControl : MonoBehaviour {
     // Use this for initialization
     void Start () {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = Sprites[0];
+        nowSprites = originSprite;
+        nowIndex = 0;
+        //spriteRenderer.sprite = Sprites[0];
     }
 	
 	// Update is called once per frame
 	void Update () {
         time += speed;
         if (time >= 1.0f) {
-            Walk();
+            UpdateSprite();
+
             time = 0.0f;
         }
 	}
 
-    void Flip() {
-
+    private void UpdateSprite() {
+        if (nowIndex == nowSprites.Length) {
+            nowSprites = originSprite;
+            nowIndex = 0;
+        }
+        spriteRenderer.sprite = nowSprites[nowIndex++];
     }
 
-    void Stop() {
-        spriteRenderer.sprite = Sprites[0];
+    public void Flip() {
+        Vector3 scale = this.transform.localScale;
+        this.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
     }
 
-    void Walk() {
-        nowIndex = (nowIndex + 1) % 8;
-        spriteRenderer.sprite = Sprites[nowIndex];
+    public void Stop() {
+
+        spriteRenderer.sprite = walkSprites[0];
+    }
+
+    public void Walk() {
+        if (nowSprites != walkSprites) {
+            nowSprites = walkSprites;
+            nowIndex = 0;
+        }
+    }
+
+    public void Die() {
+        nowSprites = deathSprites;
+        nowIndex = 0;
     }
 }

@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     [HideInInspector]
     public bool jump = false;               // Condition for whether the player should jump.
     public GameObject Wave;
+    public float waveCost = 2f;
 
     public float moveForce = 365f;          // Amount of force added to move the player left and right.
     public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
@@ -25,6 +26,8 @@ public class PlayerControl : MonoBehaviour
                                             //private Animator anim;					// Reference to the player's animator component.
 
     private PlayerHealth playerHealth;
+    private AnimationControl animationControl;
+    private string forward = "right";
     
 
     void Awake()
@@ -37,7 +40,7 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-
+        animationControl = GetComponent<AnimationControl>();
     }
 
     void Update()
@@ -67,13 +70,12 @@ public class PlayerControl : MonoBehaviour
 
     public void AddWave()
     {
-        if (playerHealth.nowhealth > playerHealth.waveCost)   //当前电量大于发波所需电量
+        if (playerHealth.nowhealth > waveCost)   //当前电量大于发波所需电量
         {
             Vector3 WavePosition = new Vector3(this.transform.position.x, this.transform.position.y, 6);
             Instantiate(Wave, WavePosition, this.transform.rotation);
-            playerHealth.WaveReduceHealth();
+            playerHealth.ReduceHealth(waveCost);
             print("发波后 nowhealth=" + playerHealth.nowhealth);
-
         }
         else
         {
@@ -104,6 +106,12 @@ public class PlayerControl : MonoBehaviour
 
         Vector3 sp = dir / 10;
 
+        if (direction != forward)
+        {
+            forward = direction;
+            animationControl.Flip();
+        }
+
         if (direction == "right")
         {
             this.transform.position += sp;
@@ -112,6 +120,8 @@ public class PlayerControl : MonoBehaviour
         {
             this.transform.position -= sp;
         }
+
+        animationControl.Walk();
     }
 
     public void Stop()
