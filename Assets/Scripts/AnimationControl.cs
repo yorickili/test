@@ -8,16 +8,19 @@ public class AnimationControl : MonoBehaviour {
     public Sprite[] originSprite;
     public Sprite[] walkSprites;
     public Sprite[] deathSprites;
+    public Sprite[] jumpSprites;
 
     private Sprite[] nowSprites;
     //private bool forward = true;
+    private GameObject player;
     private SpriteRenderer spriteRenderer;
     private int nowIndex = 0;
     private float time = 0.0f;
 
     // Use this for initialization
     void Start () {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        spriteRenderer = player.GetComponent<SpriteRenderer>();
         nowSprites = originSprite;
         nowIndex = 0;
         //spriteRenderer.sprite = Sprites[0];
@@ -42,8 +45,8 @@ public class AnimationControl : MonoBehaviour {
     }
 
     public void Flip() {
-        Vector3 scale = this.transform.localScale;
-        this.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
+        Vector3 scale = player.transform.localScale;
+        player.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
     }
 
     public void Stop() {
@@ -60,6 +63,12 @@ public class AnimationControl : MonoBehaviour {
 
     public void Die() {
         nowSprites = deathSprites;
+        nowIndex = 0;
+    }
+
+    public void Jump()
+    {
+        nowSprites = jumpSprites;
         nowIndex = 0;
     }
 }
