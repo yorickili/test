@@ -24,13 +24,6 @@ public class PlayerControl : MonoBehaviour
     private bool grounded = false;          // Whether or not the player is grounded.
                                             //private Animator anim;					// Reference to the player's animator component.
 
-    private ETCTouchPad moveJoystic;
-    private ETCTouchPad touchPad;
-    private DateTime touchTime;
-    private bool isJumping = false;
-    private bool isMoving = false;
-    private string moveDirection;
-
     private PlayerHealth playerHealth;
     
 
@@ -44,7 +37,7 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        moveJoystic = ETCInput.GetControlTouchPad("Joystick");
+
     }
 
     void Update()
@@ -53,9 +46,9 @@ public class PlayerControl : MonoBehaviour
         //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
         // If the jump button is pressed and the player is grounded then the player should jump.
-        Move();
-        if (Input.GetButtonDown("Jump"))
-            Jump();
+        //Move();
+        //if (Input.GetButtonDown("Jump"))
+        //    Jump();
     }
 
 
@@ -90,8 +83,8 @@ public class PlayerControl : MonoBehaviour
 
     public void Jump()
     {
-        isJumping = true;
-        print(grounded);
+        //isJumping = true;
+        //print(grounded);
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
         if (grounded)
         {
@@ -99,115 +92,30 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void JoystickOnTouchStart ()
+    public void Walk(string direction)
     {
-        isMoving = true;
-    }
+        Vector3 dir = new Vector3(5, 0, 0);
 
-    public void JoystickOnTouchEnd()
-    {
-        isMoving = false;
-    }
+        dir = Camera.main.transform.TransformDirection(dir);
 
-    public void Move()
-    {
-        //float h = moveJoystic.axisX.axisValue;
+        dir.y = 0;
 
-        //if (h > 0 || h < 0)
-        //if (true)
-        //{
-        //获取摇杆的方向
+        dir.Normalize();
 
-        //Vector3 dir = new Vector3(5, 0, 0);
+        Vector3 sp = dir / 10;
 
-        ////把方向转换到相机的坐标系中
-
-        //dir = Camera.main.transform.TransformDirection(dir);
-
-        ////方向的y轴值始终设为0
-
-        //dir.y = 0;
-
-        ////把方向向量归一化
-
-        //dir.Normalize();
-
-        ////指定一个4倍的向量
-
-        ////Vector3 sp = dir / 10;
-
-        //this.transform.position += dir;
-
-        //if (h * GetComponent<Rigidbody2D>().velocity.x < maxSpeed)
-        // ... add a force to the player.
-        //if (h > 0)
-        //{
-        //    GetComponent<Rigidbody2D>().AddForce(Vector2.right * 20f);
-        //}
-        //else if (h < 0)
-        //{
-        //    GetComponent<Rigidbody2D>().AddForce(Vector2.right * -20f);
-        //}
-
-
-        // If the player's horizontal velocity is greater than the maxSpeed...
-        //if (Mathf.Abs(GetComponent<Rigidbody2D>().velocity.x) > maxSpeed)
-        // ... set the player's velocity to the maxSpeed in the x axis.
-        //GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Sign(GetComponent<Rigidbody2D>().velocity.x) * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
-
-        // If the input is moving the player right and the player is facing left...
-        //if (h > 0 && !facingRight)
-        //    // ... flip the player.
-        //    Flip();
-        //// Otherwise if the input is moving the player left and the player is facing right...
-        //else if (h < 0 && facingRight)
-        //    // ... flip the player.
-        //    Flip();
-        ////}
-        /// 
-        if (isMoving) {
-            if (moveDirection == "right") {
-                GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10f);
-            } else if (moveDirection == "left") {
-                GetComponent<Rigidbody2D>().AddForce(Vector2.right * -10f);
-            }
+        if (direction == "right")
+        {
+            this.transform.position += sp;
+        }
+        else if (direction == "left")
+        {
+            this.transform.position -= sp;
         }
     }
 
-
-    public void MoveRight()
+    public void Stop()
     {
-        //Debug.Log("moveright");
-        //GetComponent<Rigidbody2D>().AddForce(Vector2.right * 15f);
-        moveDirection = "right";
-        if (!facingRight) Flip();
-    }
 
-    public void MoveLeft()
-    {
-        //GetComponent<Rigidbody2D>().AddForce(Vector2.left * 15f);
-        moveDirection = "left";
-        if (facingRight) Flip();
-    }
-
-    public void TouchStart()
-    {
-        touchTime = DateTime.Now;
-        isJumping = false;
-    }
-
-
-    public void TouchEnd()
-    {
-        //long time = (long)(DateTime.Now - touchTime).TotalMilliseconds;
-        //Debug.Log(time);
-        //if (time < 200)
-        //{
-        //    AddWave();
-        //}
-        if (!isJumping) {
-            AddWave();
-        }
-        isJumping = false;
     }
 }
