@@ -29,14 +29,14 @@ public class HealthPickup : MonoBehaviour
 			// Get a reference to the player health script.
 			PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
 
-			// Increasse the player's health by the health bonus but clamp it at 100.
-			playerHealth.nowhealth += healthBonus;
-			playerHealth.nowhealth = Mathf.Clamp(playerHealth.nowhealth, 0f, playerHealth.health);
-
+            // Increasse the player's health by the health bonus but clamp it at 100.
+            //playerHealth.nowhealth += healthBonus;
+            //playerHealth.nowhealth = Mathf.Clamp(playerHealth.nowhealth, 0f, playerHealth.maxhealth);
+            playerHealth.IncreaseHealth(healthBonus);
             print("add now health"+playerHealth.nowhealth);
 
 			// Update the health bar.
-			playerHealth.UpdateHealthBar();
+			//playerHealth.UpdateHealthBar();
 
 			// Trigger a new delivery.
 			//pickupSpawner.StartCoroutine(pickupSpawner.DeliverPickup());
