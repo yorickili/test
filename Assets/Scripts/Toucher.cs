@@ -9,15 +9,22 @@ public class Toucher : MonoBehaviour {
 
     private bool isMoving = false;
     private bool isTouching = false;
-    private string moveDirection;
+    private bool isSquating = false;
+    private string direction;
     private Transform wallCheck;
+    private Transform groundCheck1;
+    private Transform groundCheck2;
+    private bool grounded1 = false;
+    private bool grounded2 = false;
     private bool walled = false;
 
-    private void Awake()
+    void Awake()
     {
         wallCheck = transform.Find("wallCheck");
+        groundCheck1 = transform.Find("groundCheck1");
+        groundCheck2 = transform.Find("groundCheck2");
     }
-    // Use this for initialization
+
     void Start () {
         Joystick = ETCInput.GetControlTouchPad("Joystick");
         TouchPad = ETCInput.GetControlTouchPad("TouchPad");
@@ -28,17 +35,10 @@ public class Toucher : MonoBehaviour {
         TouchPad.onTouchStart.AddListener(OnTouchPadTouchStart);
         TouchPad.onTouchUp.AddListener(OnTouchPadTouchUp);
         TouchPad.OnDownUp.AddListener(OnTouchPadDownUp);
+        TouchPad.OnDownDown.AddListener(OnTouchPadDownDown);
     }
 	
-	// Update is called once per frame
 	void Update () {
-        //walled = Physics2D.Linecast(transform.position, wallCheck.position, (1 << LayerMask.NameToLayer("Neon")));
-        //Debug.Log(moveDirection);
-        //if (!walled && moveDirection == "right") {
-        //    Move();
-        //}
-        Move();
-
         if (Input.GetKeyUp(KeyCode.Space))
         {
             GetComponent<PlayerControl>().Jump();
@@ -46,16 +46,41 @@ public class Toucher : MonoBehaviour {
         if (Input.GetKey(KeyCode.A))
         {
             isMoving = true;
-            moveDirection = "left";
-            Move();
-            isMoving = false;
+            direction = "left";
         }
         if (Input.GetKey(KeyCode.D))
         {
             isMoving = true;
-            moveDirection = "right";
-            Move();
-            isMoving = false;
+            direction = "right";
+        }
+
+        walled = Physics2D.Linecast(transform.position, wallCheck.position, (1 << LayerMask.NameToLayer("Neon")));
+        if (!walled) {
+            if (isMoving)
+            {
+                GetComponent<PlayerControl>().Walk(direction);
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                {
+                    isMoving = false;
+                }
+            }
+            else
+            {
+                GetComponent<PlayerControl>().Stop();
+            }
+        }
+        else
+        {
+            Vector3 right = new Vector3(0, 0, 1f);
+            Vector3 left = new Vector3(0, 0, -1f);
+            if (this.transform.forward == right && direction == "left")
+            {
+                GetComponent<PlayerControl>().Walk("left");
+            }
+            else if (this.transform.forward == left && direction == "right")
+            {
+                GetComponent<PlayerControl>().Walk("right");
+            }
         }
     }
 
@@ -71,24 +96,12 @@ public class Toucher : MonoBehaviour {
 
     void OnJoystickPressRight ()
     {
-        moveDirection = "right";
+        direction = "right";
     }
 
     void OnJoystickPressLeft()
     {
-        moveDirection = "left";
-    }
-
-    void Move()
-    {
-        if (isMoving)
-        {
-            GetComponent<PlayerControl>().Walk(moveDirection);
-        } 
-        else 
-        {
-            GetComponent<PlayerControl>().Stop();
-        }
+        direction = "left";
     }
 
     void OnTouchPadTouchStart ()
@@ -98,7 +111,8 @@ public class Toucher : MonoBehaviour {
 
     void OnTouchPadTouchUp ()
     {
-        if (!isTouching) {
+        if (!isTouching)
+        {
             GetComponent<PlayerControl>().AddWave();
         }
     }
@@ -106,6 +120,25 @@ public class Toucher : MonoBehaviour {
     void OnTouchPadDownUp ()
     {
         isTouching = true;
-        GetComponent<PlayerControl>().Jump();
+        //grounded1 = Physics2D.Linecast(transform.position, groundCheck1.position, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
+        //grounded2 = Physics2D.Linecast(transform.position, groundCheck2.position, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
+        //Debug.Log(grounded1 || grounded2);
+        //Debug.Log(grounded2);
+        if (isSquating)
+        {
+            GetComponent<PlayerControl>().Stand();
+            isSquating = false;
+        }
+        else
+        {
+            GetComponent<PlayerControl>().Jump();
+        }
+    }
+
+    void OnTouchPadDownDown()
+    {
+        isTouching = true;
+        isSquating = true;
+        GetComponent<PlayerControl>().Squat();
     }
 }
