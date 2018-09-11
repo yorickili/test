@@ -14,16 +14,17 @@ public class PlayerControl : MonoBehaviour
     public float moveForce = 365f;          // Amount of force added to move the player left and right.
     public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
                                             //public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
-    public float jumpForce = 500f;          // Amount of force added when the player jumps.
-                                            //public AudioClip[] taunts;				// Array of clips for when the player taunts.
-                                            //public float tauntProbability = 50f;	// Chance of a taunt happening.
-                                            //public float tauntDelay = 1f;			// Delay for when the taunt should happen.
+    public float jumpForce = 500f;
+    public float damageForce = 50f;
 
 
-    private int tauntIndex;                 // The index of the taunts array indicating the most recent taunt.
+    //private int tauntIndex;                 // The index of the taunts array indicating the most recent taunt.
     private Transform groundCheck;          // A position marking where to check if the player is grounded.
-    private bool grounded = false;          // Whether or not the player is grounded.
-                                            //private Animator anim;					// Reference to the player's animator component.
+    //private bool grounded = false;          // Whether or not the player is grounded.
+    private bool isJumping = false;
+    private bool isMoving = false;
+    private string walkDirection = "";
+                                            
 
     private PlayerHealth playerHealth;
     private AnimationControl animationControl;
@@ -40,33 +41,33 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        animationControl = GetComponent<AnimationControl>();
+        animationControl = GameObject.FindGameObjectWithTag("AnimationManager").GetComponent<AnimationControl>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        bool isGround = IsGround();
+        if (isJumping && isGround)
+        {
+            isJumping = false;
+            animationControl.Stop();
+        }
+        else if (!isJumping && !isGround)
+        {
+            isJumping = true;
+            animationControl.Jump();
+        }
 
-        // If the jump button is pressed and the player is grounded then the player should jump.
-        //Move();
-        //if (Input.GetButtonDown("Jump"))
-        //    Jump();
+        if (isMoving)
+            WalkAtUpdate();
     }
 
-
-    void Flip()
+    private bool IsGround()
     {
-        // Switch the way the player is labelled as facing.
-        facingRight = !facingRight;
-
-        // Multiply the player's x local scale by -1.
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        return Physics2D.Linecast(transform.position, groundCheck.position, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
     }
 
- 
+
 
     public void AddWave()
     {
@@ -83,19 +84,30 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    void Flip()
+    {
+        // Switch the way the player is labelled as facing.
+        facingRight = !facingRight;
+
+        // Multiply the player's x local scale by -1.
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
     public void Jump()
     {
-        //isJumping = true;
-        //print(grounded);
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
-        if (grounded)
+        if (IsGround())
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+            //animationControl.Jump();
+            //isJumping = 5;
         }
     }
 
-    public void Walk(string direction)
+    private void WalkAtUpdate()
     {
+
         Vector3 dir = new Vector3(5, 0, 0);
 
         dir = Camera.main.transform.TransformDirection(dir);
@@ -106,26 +118,51 @@ public class PlayerControl : MonoBehaviour
 
         Vector3 sp = dir / 10;
 
-        if (direction != forward)
+        if (walkDirection != forward)
         {
-            forward = direction;
+            forward = walkDirection;
             animationControl.Flip();
         }
 
-        if (direction == "right")
+        if (walkDirection == "right")
         {
             this.transform.position += sp;
         }
-        else if (direction == "left")
+        else if (walkDirection == "left")
         {
             this.transform.position -= sp;
         }
 
-        animationControl.Walk();
+        if (!isJumping)
+            animationControl.Walk();
+
+        isMoving = false;
+    }
+
+    public void Walk(string direction)
+    {
+        walkDirection = direction;
+        isMoving = true;
     }
 
     public void Stop()
     {
 
+    }
+
+    public void TakeDamage(float delta)
+    {
+        playerHealth.ReduceHealth(delta);
+        if (forward == "right")
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(-damageForce, 0f));
+        else
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(damageForce, 0f));
+        animationControl.TakeDamage();
+    }
+
+    public void Death()
+    {
+        animationControl.Die();
+        this.enabled = false;
     }
 }
