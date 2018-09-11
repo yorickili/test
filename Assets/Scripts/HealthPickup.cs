@@ -28,27 +28,13 @@ public class HealthPickup : MonoBehaviour
 		{
 			// Get a reference to the player health script.
 			PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-
-			// Increasse the player's health by the health bonus but clamp it at 100.
-			playerHealth.nowhealth += healthBonus;
-			playerHealth.nowhealth = Mathf.Clamp(playerHealth.nowhealth, 0f, playerHealth.health);
-
-            print("add now health"+playerHealth.nowhealth);
-
-			// Update the health bar.
-			playerHealth.UpdateHealthBar();
-
-			// Trigger a new delivery.
-			//pickupSpawner.StartCoroutine(pickupSpawner.DeliverPickup());
-
-			// Play the collection sound.
-			//AudioSource.PlayClipAtPoint(collect,transform.position);
+            playerHealth.IncreaseHealth(healthBonus);
 
 			// Destroy the crate.
 			Destroy(transform.root.gameObject);
 		}
 		// Otherwise if the crate hits the ground...
-		else if(other.tag == "Ground" && !landed)
+		/*else if(other.tag == "Ground" && !landed)
 		{
 			// ... set the Land animator trigger parameter.
 			//anim.SetTrigger("Land");
@@ -58,6 +44,6 @@ public class HealthPickup : MonoBehaviour
 			landed = true;
 
            // Destroy(gameObject, staytime);
-		}
+		}*/
 	}
 }
