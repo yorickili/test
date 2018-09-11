@@ -14,16 +14,16 @@ public class PlayerControl : MonoBehaviour
     public float moveForce = 365f;          // Amount of force added to move the player left and right.
     public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
                                             //public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
-    public float jumpForce = 500f;          // Amount of force added when the player jumps.
-                                            //public AudioClip[] taunts;				// Array of clips for when the player taunts.
-                                            //public float tauntProbability = 50f;	// Chance of a taunt happening.
-                                            //public float tauntDelay = 1f;			// Delay for when the taunt should happen.
+    public float jumpForce = 500f;
+    public float damageForce = 50f;
 
 
     //private int tauntIndex;                 // The index of the taunts array indicating the most recent taunt.
     private Transform groundCheck;          // A position marking where to check if the player is grounded.
     //private bool grounded = false;          // Whether or not the player is grounded.
     private bool isJumping = false;
+    private bool isMoving = false;
+    private string walkDirection = "";
                                             
 
     private PlayerHealth playerHealth;
@@ -44,19 +44,25 @@ public class PlayerControl : MonoBehaviour
         animationControl = GameObject.FindGameObjectWithTag("AnimationManager").GetComponent<AnimationControl>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (isJumping)
+        bool isGround = IsGround();
+        if (isJumping && isGround)
         {
-            if (isGround()) 
-            {
-                isJumping = false;
-                animationControl.Stop();
-            }
+            isJumping = false;
+            animationControl.Stop();
         }
+        else if (!isJumping && !isGround)
+        {
+            isJumping = true;
+            animationControl.Jump();
+        }
+
+        if (isMoving)
+            WalkAtUpdate();
     }
 
-    private bool isGround()
+    private bool IsGround()
     {
         return Physics2D.Linecast(transform.position, groundCheck.position, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
     }
@@ -91,16 +97,17 @@ public class PlayerControl : MonoBehaviour
 
     public void Jump()
     {
-        if (isGround())
+        if (IsGround())
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
-            animationControl.Walk();
-            isJumping = true;
+            //animationControl.Jump();
+            //isJumping = 5;
         }
     }
 
-    public void Walk(string direction)
+    private void WalkAtUpdate()
     {
+
         Vector3 dir = new Vector3(5, 0, 0);
 
         dir = Camera.main.transform.TransformDirection(dir);
@@ -111,22 +118,31 @@ public class PlayerControl : MonoBehaviour
 
         Vector3 sp = dir / 10;
 
-        if (direction != forward)
+        if (walkDirection != forward)
         {
-            forward = direction;
+            forward = walkDirection;
             animationControl.Flip();
         }
 
-        if (direction == "right")
+        if (walkDirection == "right")
         {
             this.transform.position += sp;
         }
-        else if (direction == "left")
+        else if (walkDirection == "left")
         {
             this.transform.position -= sp;
         }
 
-        animationControl.Walk();
+        if (!isJumping)
+            animationControl.Walk();
+
+        isMoving = false;
+    }
+
+    public void Walk(string direction)
+    {
+        walkDirection = direction;
+        isMoving = true;
     }
 
     public void Stop()
@@ -137,6 +153,10 @@ public class PlayerControl : MonoBehaviour
     public void TakeDamage(float delta)
     {
         playerHealth.ReduceHealth(delta);
+        if (forward == "right")
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(-damageForce, 0f));
+        else
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(damageForce, 0f));
         animationControl.TakeDamage();
     }
 
