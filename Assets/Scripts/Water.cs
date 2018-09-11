@@ -9,8 +9,9 @@ public class Water : MonoBehaviour {
     private PlayerControl playerControl;
     private PlayerHealth playerHealth;
 
-    private bool islastinghurt = false;          //是否持续掉血
+    private bool isPlayerInwater = false;          //是否持续掉血
     public float hurtingtime = 0.2f;               //持续掉血属性：每秒掉多少血
+    private bool isBoxInWater = false;
 
     // Use this for initialization
     void Start () {
@@ -21,38 +22,85 @@ public class Water : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (islastinghurt)
+        if (isPlayerInwater)
         {
-            playerHealth.ReduceHealth(hurtingtime);
-            //playerControl.ReduceHealth(hurtingtime);
-            print("touch water" + playerHealth.nowhealth);
-
+              playerHealth.ReduceHealth(hurtingtime);
+            // print("touch water" + playerHealth.nowhealth);
         }
 
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        float colPositionX = collision.transform.position.x-2f;
-        Vector3 colPosition = new Vector3(colPositionX, transform.position.y, hero.transform.position.z);
-        GameObject sprayclone =  Instantiate(spray, colPosition, this.transform.rotation) as GameObject;
-        Destroy(sprayclone, 1);
+        //float colPositionX = collision.transform.position.x - collision.collider.bounds.size.x;
+        //print(transform.position.x);
+   
+       // float sparyWidth = spray.GetComponent<Renderer>().bounds.size.x*spray.transform.localScale.x/2;
+        float waterWidth = GetComponent<Renderer>().bounds.size.x;
+        float waterLeftbbounds = transform.position.x-waterWidth/2;
+        float waterRightbbounds = transform.position.x + waterWidth/2 ;
+       // print(waterLeftbbounds);
+       // print(waterRightbbounds);
+        float colPositionX = collision.collider.transform.position.x;
 
-        if (collision.tag == "Player")
+        //print(sparyWidth);
+        float sparyWidth = 2.5f;
+        if (collision.collider.tag == "Player") {
+            if (!isPlayerInwater)
+            {
+                isPlayerInwater = true;
+                float leftOff = 0;
+                print(colPositionX);
+                if (colPositionX<(waterLeftbbounds+sparyWidth))
+                {
+                   // print("1");
+                   leftOff = waterLeftbbounds ;
+                   Vector3 colPosition = new Vector3(leftOff, transform.position.y, hero.transform.position.z);
+                    GameObject sprayclone = Instantiate(spray, colPosition, this.transform.rotation) as GameObject;
+                    Destroy(sprayclone, 0.5f);
+                }
+                else if (colPositionX > (waterRightbbounds - sparyWidth))
+                {
+                   // print("2");
+                    leftOff = waterRightbbounds-sparyWidth;
+                    Vector3 colPosition = new Vector3(leftOff, transform.position.y, hero.transform.position.z);
+                    GameObject sprayclone = Instantiate(spray, colPosition, this.transform.rotation) as GameObject;
+                    Destroy(sprayclone, 0.5f);
+                }
+                else
+               {
+                    // print("3");
+                     leftOff = sparyWidth/2 ;
+                     Vector3 colPosition = new Vector3(colPositionX - leftOff, transform.position.y, hero.transform.position.z);
+                     GameObject sprayclone = Instantiate(spray, colPosition, this.transform.rotation) as GameObject;
+
+                     Destroy(sprayclone, 0.5f);
+                }
+               
+               
+               
+            }
+         }
+        else if(collision.collider.name == "prop_box")
         {
-            islastinghurt = true;
-           
-        }
-        else if(collision.name == "prop_box"){
-           // Destroy(collision);
-        }
+            if (!isBoxInWater)
+            {
+                isBoxInWater = true;
+
+                float leftOff = sparyWidth/2;
+                Vector3 colPosition = new Vector3(collision.collider.transform.position.x -leftOff, transform.position.y, hero.transform.position.z);
+                GameObject sprayclone = Instantiate(spray, colPosition, this.transform.rotation) as GameObject;
+                Destroy(sprayclone, 0.50f);
+            }
+        }          
     }
 
-    
     private void OnTriggerExit2D(Collider2D collision)
     {
-        islastinghurt = false;
+        
+        isPlayerInwater = false;
+
     }
 }
