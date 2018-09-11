@@ -20,10 +20,11 @@ public class PlayerControl : MonoBehaviour
                                             //public float tauntDelay = 1f;			// Delay for when the taunt should happen.
 
 
-    private int tauntIndex;                 // The index of the taunts array indicating the most recent taunt.
+    //private int tauntIndex;                 // The index of the taunts array indicating the most recent taunt.
     private Transform groundCheck;          // A position marking where to check if the player is grounded.
-    private bool grounded = false;          // Whether or not the player is grounded.
-                                            //private Animator anim;					// Reference to the player's animator component.
+    //private bool grounded = false;          // Whether or not the player is grounded.
+    private bool isJumping = false;
+                                            
 
     private PlayerHealth playerHealth;
     private AnimationControl animationControl;
@@ -40,33 +41,27 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
-        animationControl = GetComponent<AnimationControl>();
+        animationControl = GameObject.FindGameObjectWithTag("AnimationManager").GetComponent<AnimationControl>();
     }
 
     void Update()
     {
-        // The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-        //grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
-
-        // If the jump button is pressed and the player is grounded then the player should jump.
-        //Move();
-        //if (Input.GetButtonDown("Jump"))
-        //    Jump();
+        if (isJumping)
+        {
+            if (isGround()) 
+            {
+                isJumping = false;
+                animationControl.Stop();
+            }
+        }
     }
 
-
-    void Flip()
+    private bool isGround()
     {
-        // Switch the way the player is labelled as facing.
-        facingRight = !facingRight;
-
-        // Multiply the player's x local scale by -1.
-        Vector3 theScale = transform.localScale;
-        theScale.x *= -1;
-        transform.localScale = theScale;
+        return Physics2D.Linecast(transform.position, groundCheck.position, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
     }
 
- 
+
 
     public void AddWave()
     {
@@ -83,14 +78,24 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    void Flip()
+    {
+        // Switch the way the player is labelled as facing.
+        facingRight = !facingRight;
+
+        // Multiply the player's x local scale by -1.
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
+
     public void Jump()
     {
-        //isJumping = true;
-        //print(grounded);
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
-        if (grounded)
+        if (isGround())
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+            animationControl.Walk();
+            isJumping = true;
         }
     }
 
@@ -127,5 +132,17 @@ public class PlayerControl : MonoBehaviour
     public void Stop()
     {
 
+    }
+
+    public void TakeDamage(float delta)
+    {
+        playerHealth.ReduceHealth(delta);
+        animationControl.TakeDamage();
+    }
+
+    public void Death()
+    {
+        animationControl.Die();
+        this.enabled = false;
     }
 }
