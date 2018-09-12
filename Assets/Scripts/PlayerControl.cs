@@ -28,6 +28,7 @@ public class PlayerControl : MonoBehaviour
     //private bool isTiptoeOnGround = false;
     //private bool isHeelOnGround = false;
     private bool isWallNear = false;
+    private bool isNeonNear = false;
     private int wallJumpCount = 0;
     private string walkDirection = "";
                                             
@@ -135,7 +136,6 @@ public class PlayerControl : MonoBehaviour
 
     private void WalkAtUpdate()
     {
-
         Vector3 dir = new Vector3(5, 0, 0);
 
         dir = Camera.main.transform.TransformDirection(dir);
@@ -146,25 +146,41 @@ public class PlayerControl : MonoBehaviour
 
         Vector3 sp = dir / 10;
 
-        if (walkDirection != forward)
+        if (!isWallNear && !isNeonNear)
         {
-            forward = walkDirection;
-            animationControl.Flip();
-        }
+            if (walkDirection != forward)
+            {
+                forward = walkDirection;
+                animationControl.Flip();
+            }
 
-        if (walkDirection == "right")
+            if (walkDirection == "right")
+            {
+                this.transform.position += sp;
+            }
+            else if (walkDirection == "left")
+            {
+                this.transform.position -= sp;
+            }
+
+            if (!isJumping)
+                animationControl.Walk();
+
+            isMoving = false;
+        }
+        else
         {
-            this.transform.position += sp;
+            Vector3 right = new Vector3(0, 0, 1f);
+            Vector3 left = new Vector3(0, 0, -1f);
+            if (this.transform.forward == right && walkDirection == "left")
+            {
+                this.transform.position -= sp;
+            }
+            else if (this.transform.forward == left && walkDirection == "right")
+            {
+                this.transform.position += sp;
+            }
         }
-        else if (walkDirection == "left")
-        {
-            this.transform.position -= sp;
-        }
-
-        if (!isJumping)
-            animationControl.Walk();
-
-        isMoving = false;
     }
 
     public void Walk(string direction)
@@ -210,13 +226,21 @@ public class PlayerControl : MonoBehaviour
         {
             isWallNear = true;
         }
+        if (collision.gameObject.tag == "Neon")
+        {
+            isNeonNear = true;
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Wall")
         {
             isWallNear = false;
+        }
+        if (collision.gameObject.tag == "Neon")
+        {
+            isNeonNear = false;
         }
     }
 }
