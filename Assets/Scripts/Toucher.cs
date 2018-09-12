@@ -11,18 +11,18 @@ public class Toucher : MonoBehaviour {
     private bool isTouching = false;
     private bool isSquating = false;
     private string direction;
-    private Transform wallCheck;
-    private Transform groundCheck1;
-    private Transform groundCheck2;
-    private bool grounded1 = false;
-    private bool grounded2 = false;
-    private bool walled = false;
+    //private Transform wallCheck;
+    //private Transform groundCheck1;
+    //private Transform groundCheck2;
+    //private bool grounded1 = false;
+    //private bool grounded2 = false;
+    //private bool walled = false;
 
     void Awake()
     {
-        wallCheck = transform.Find("wallCheck");
-        groundCheck1 = transform.Find("groundCheck1");
-        groundCheck2 = transform.Find("groundCheck2");
+        //wallCheck = transform.Find("wallCheck");
+        //groundCheck1 = transform.Find("groundCheck1");
+        //groundCheck2 = transform.Find("groundCheck2");
     }
 
     void Start () {
@@ -54,8 +54,8 @@ public class Toucher : MonoBehaviour {
             direction = "right";
         }
 
-        walled = Physics2D.Linecast(transform.position, wallCheck.position, (1 << LayerMask.NameToLayer("Neon")));
-        if (!walled) {
+        //walled = Physics2D.Linecast(transform.position, wallCheck.position, (1 << LayerMask.NameToLayer("Neon")));
+        //if (!walled) {
             if (isMoving)
             {
                 GetComponent<PlayerControl>().Walk(direction);
@@ -68,20 +68,20 @@ public class Toucher : MonoBehaviour {
             {
                 GetComponent<PlayerControl>().Stop();
             }
-        }
-        else
-        {
-            Vector3 right = new Vector3(0, 0, 1f);
-            Vector3 left = new Vector3(0, 0, -1f);
-            if (this.transform.forward == right && direction == "left")
-            {
-                GetComponent<PlayerControl>().Walk("left");
-            }
-            else if (this.transform.forward == left && direction == "right")
-            {
-                GetComponent<PlayerControl>().Walk("right");
-            }
-        }
+        //}
+        //else
+        //{
+        //    Vector3 right = new Vector3(0, 0, 1f);
+        //    Vector3 left = new Vector3(0, 0, -1f);
+        //    if (this.transform.forward == right && direction == "left")
+        //    {
+        //        GetComponent<PlayerControl>().Walk("left");
+        //    }
+        //    else if (this.transform.forward == left && direction == "right")
+        //    {
+        //        GetComponent<PlayerControl>().Walk("right");
+        //    }
+        //}
     }
 
     void OnJoystickTouchStart ()
