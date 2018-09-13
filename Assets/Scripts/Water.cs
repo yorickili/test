@@ -18,6 +18,8 @@ public class Water : MonoBehaviour {
         hero = GameObject.FindGameObjectWithTag("Player");
         playerControl = hero.GetComponent<PlayerControl>();
         playerHealth = hero.GetComponent<PlayerHealth>();
+
+
 	}
 	
 	// Update is called once per frame
@@ -30,12 +32,16 @@ public class Water : MonoBehaviour {
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Player")
+        {
+            playerControl.TakeDamage(hurtingtime);
+        }
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        //float colPositionX = collision.transform.position.x - collision.collider.bounds.size.x;
-        //print(transform.position.x);
    
        // float sparyWidth = spray.GetComponent<Renderer>().bounds.size.x*spray.transform.localScale.x/2;
         float waterWidth = GetComponent<Renderer>().bounds.size.x;
