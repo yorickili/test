@@ -170,13 +170,12 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            Vector3 right = new Vector3(0, 0, 1f);
-            Vector3 left = new Vector3(0, 0, -1f);
-            if (this.transform.forward == right && walkDirection == "left")
+            string _forward = (transform.localScale.x > 0) ? "right" : "left";
+            if (_forward == "right" && walkDirection == "left")
             {
                 this.transform.position -= sp;
             }
-            else if (this.transform.forward == left && walkDirection == "right")
+            else if (_forward == "left" && walkDirection == "right")
             {
                 this.transform.position += sp;
             }
