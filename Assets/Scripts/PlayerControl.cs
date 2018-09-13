@@ -43,6 +43,8 @@ public class PlayerControl : MonoBehaviour
         //wallCheck = transform.Find("wallCheck");
         //anim = GetComponent<Animator>();
         playerHealth = GetComponent<PlayerHealth>();
+        //Debug.Log("111111111" + PlayerPrefs.GetInt("round"));
+        //PlayerPrefs.SetInt("round", 1);
     }
 
     void Start()
@@ -84,9 +86,22 @@ public class PlayerControl : MonoBehaviour
 
         bool tiptoe1 = Physics2D.Linecast(transform.position, tiptoeCheck, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
         bool heel1 = Physics2D.Linecast(transform.position, heelCheck, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
-        return tiptoe1 || heel1;
+        Debug.Log("tiptoe:" + tiptoe1);
+        Debug.Log("heel: "+ heel1);
+        return (tiptoe1 || heel1) && !(tiptoe1 && heel1);
     }
 
+    private bool IsUpstair()
+    {
+        Vector3 tiptoe = new Vector3(1.8f, -7.5f, 0);
+        Vector3 heel = new Vector3(-1.8f, -7.5f, 0);
+        Vector3 tiptoeCheck = new Vector3(tiptoe.x * transform.localScale.x, tiptoe.y * transform.localScale.y, tiptoe.z * transform.localScale.z) + transform.position;
+        Vector3 heelCheck = new Vector3(heel.x * transform.localScale.x, heel.y * transform.localScale.y, heel.z * transform.localScale.z) + transform.position;
+
+        bool tiptoe1 = Physics2D.Linecast(transform.position, tiptoeCheck, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
+        bool heel1 = Physics2D.Linecast(transform.position, heelCheck, (1 << LayerMask.NameToLayer("Ground")) | (1 << LayerMask.NameToLayer("Neon")));
+        return (tiptoe1 && !heel1);
+    }
 
     public void AddWave()
     {
@@ -116,7 +131,6 @@ public class PlayerControl : MonoBehaviour
 
     public void Jump()
     {
-        IsSlope();
         if (IsGround() || IsSlope())
         {
             GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
@@ -141,6 +155,13 @@ public class PlayerControl : MonoBehaviour
         dir = Camera.main.transform.TransformDirection(dir);
 
         dir.y = 0;
+
+        if (IsUpstair()) 
+        {
+            dir.y = -10;
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 15f));
+
+        }
 
         dir.Normalize();
 
@@ -221,7 +242,7 @@ public class PlayerControl : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Ground")
         {
             isWallNear = true;
         }
@@ -233,7 +254,7 @@ public class PlayerControl : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Wall")
+        if (collision.gameObject.tag == "Ground")
         {
             isWallNear = false;
         }
