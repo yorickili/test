@@ -21,11 +21,13 @@ public class LightCamera : MonoBehaviour {
 
     private void Start()
     {
-        renderTexture = new RenderTexture(Screen.width / 5, Screen.height / 5, 0);
+        renderTexture = new RenderTexture(Screen.width, Screen.height, 0);
         this.GetComponent<Camera>().targetTexture = renderTexture;
 
-        RawImage rawImage = GameObject.FindGameObjectWithTag("BlackBG").GetComponent<RawImage>();
-        rawImage.texture = renderTexture;
+        //RawImage rawImage = GameObject.FindGameObjectWithTag("BlackBG").GetComponent<RawImage>();
+        //rawImage.texture = renderTexture;
+
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<FogWeather>().LightCameraOut = renderTexture;
     }
 	
 	// Update is called once per frame

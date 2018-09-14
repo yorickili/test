@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Gate : MonoBehaviour {
 
-    public float scale = 100;
+    private float scale = 100;
     private bool open = false;
 
 	// Use this for initialization
