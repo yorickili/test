@@ -117,7 +117,6 @@ public class PlayerControl : MonoBehaviour
 
     public void AddWave()
     {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<Gate>().Open();
         if (waveLast > 0)
         {
             return;
