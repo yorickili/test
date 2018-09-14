@@ -55,6 +55,7 @@ public class AnimationControl : MonoBehaviour
         {
             callback();
         }
+        print("nowIndex: " + nowIndex);
         spriteRenderer.sprite = nowSprites[nowIndex++];
     }
 
@@ -68,7 +69,8 @@ public class AnimationControl : MonoBehaviour
 
     private void DeathCallback()
     {
-        GetComponent<PlayerControl>().enabled = false;
+        print("death index: " + nowIndex);
+        --nowIndex;
         //todo add death dialog
     }
 
@@ -132,6 +134,7 @@ public class AnimationControl : MonoBehaviour
         nowSprites = deathSprites;
         nowIndex = 0;
         callback = new AnimationHandler(DeathCallback);
+        player.GetComponent<Toucher>().enabled = false;
     }
 
 }
