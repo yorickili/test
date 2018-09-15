@@ -249,7 +249,7 @@ public class PlayerControl : MonoBehaviour
     {
         animationControl.Die();
         GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 4f);
-        this.enabled = false;
+        //this.enabled = false;
     }
 
     public void Squat()
