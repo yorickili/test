@@ -19,7 +19,7 @@ public class Key : MonoBehaviour {
 	{
         if (collision.tag == "Player")
         {
-            GameObject.FindGameObjectWithTag("Pass").GetComponent<Pass>().haveKey = true;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>().haveKey = true;
             this.gameObject.SetActive(false);
         }
 	}

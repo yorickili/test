@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
     public bool facingRight = true;         // For determining which way the player is currently facing.
     [HideInInspector]
     public bool jump = false;               // Condition for whether the player should jump.
+    public bool haveKey = false;
     public GameObject Wave;
     private int waveCD = 100;
     public float waveCost = 2f;
@@ -152,7 +153,7 @@ public class PlayerControl : MonoBehaviour
         if (IsGround() || IsSlope())
         {
             print("isMoving: "+isMoving);
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 200f : 0f)));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 100f : 0f)));
             wallJumpCount = 0;
             //animationControl.Jump();
             //isJumping = 5;
@@ -161,7 +162,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (wallJumpCount < 1)
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 200f : 0f)));
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 100f : 0f)));
                 wallJumpCount += 1;
             }
         }
@@ -248,7 +249,7 @@ public class PlayerControl : MonoBehaviour
     {
         animationControl.Die();
         GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 4f);
-        //this.enabled = false;
+        this.enabled = false;
     }
 
     public void Squat()

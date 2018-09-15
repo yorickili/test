@@ -55,7 +55,6 @@ public class AnimationControl : MonoBehaviour
         {
             callback();
         }
-        print("nowIndex: " + nowIndex);
         spriteRenderer.sprite = nowSprites[nowIndex++];
     }
 

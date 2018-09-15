@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Pass : MonoBehaviour
 {
-
-    public bool haveKey = false;
+    public int nextPart = -1;
+    public GameObject nextEnter;
+    private PlayerControl playerControl;
 
     // Use this for initialization
     void Start()
     {
-        haveKey = false;
+        playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
     }
 
     // Update is called once per frame
@@ -23,14 +24,25 @@ public class Pass : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            if (haveKey)
-                PassThisLevel();
+            if (playerControl.haveKey)
+                PassThisPart();
         }
+    }
+
+    private void PassThisPart()
+    {
+        if (nextPart == -1)
+        {
+            PassThisLevel();
+        }
+
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>().ChangePart(nextPart);
+        GameObject.FindGameObjectWithTag("Player").transform.position = nextEnter.transform.position;
+        playerControl.haveKey = false;
     }
 
     private void PassThisLevel() 
     {
         //todo
-        GameObject.FindGameObjectWithTag("BlackBG").GetComponent<SetBlackBGTransform>().PassLevelAnimation();
     }
 }
