@@ -48,7 +48,7 @@ public class CameraFollow : MonoBehaviour
 	private void Start()
 	{
         SetBasicValues();
-        ChangePart(2);
+        ChangePart(0);
     }
 
     public void Stop()

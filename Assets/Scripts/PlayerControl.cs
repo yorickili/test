@@ -8,6 +8,7 @@ public class PlayerControl : MonoBehaviour
     public bool facingRight = true;         // For determining which way the player is currently facing.
     [HideInInspector]
     public bool jump = false;               // Condition for whether the player should jump.
+    public bool isSquat = false;
     public bool haveKey = false;
     public GameObject Wave;
     private int waveCD = 100;
@@ -254,12 +255,16 @@ public class PlayerControl : MonoBehaviour
 
     public void Squat()
     {
-        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 5f);
+        GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.32f, -1.35f);
+        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 13.3f);
+        isSquat = true;
     }
 
     public void Stand()
     {
-        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 14f);
+        GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.32f, -0.17f);
+        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 15.6f);
+        isSquat = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

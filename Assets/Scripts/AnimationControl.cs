@@ -9,6 +9,9 @@ public class AnimationControl : MonoBehaviour
     public Sprite[] originSprite;
     public Sprite[] walkLeftFootSprites;
     public Sprite[] walkRightFootSprites;
+    public Sprite[] originSquatSprite;
+    public Sprite[] walkSquatLeftFoot;
+    public Sprite[] walkSquatRightFoot;
     public Sprite[] deathSprites;
     public Sprite[] jumpUpSprites;
     public Sprite[] jumpDownSprites;
@@ -30,8 +33,7 @@ public class AnimationControl : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer = player.GetComponent<SpriteRenderer>();
-        nowSprites = originSprite;
-        nowIndex = 0;
+        SetOrigin();
         //spriteRenderer.sprite = Sprites[0];
 
         callback = new AnimationHandler(SetOrigin);
@@ -58,11 +60,18 @@ public class AnimationControl : MonoBehaviour
         spriteRenderer.sprite = nowSprites[nowIndex++];
     }
 
+    private bool isPlayerSquat()
+    {
+        return player.GetComponent<PlayerControl>().isSquat;
+    }
 
     //call backs
     private void SetOrigin()
     {
-        nowSprites = originSprite;
+        if (isPlayerSquat())
+            nowSprites = originSquatSprite;
+        else
+            nowSprites = originSprite;
         nowIndex = 0;
     }
 
@@ -75,7 +84,10 @@ public class AnimationControl : MonoBehaviour
 
     private void WalkNextFoot()
     {
-        nowSprites = (leftfoot) ? walkRightFootSprites : walkLeftFootSprites;
+        if (isPlayerSquat())
+            nowSprites = (leftfoot) ? walkSquatRightFoot : walkSquatLeftFoot;
+        else
+            nowSprites = (leftfoot) ? walkRightFootSprites : walkLeftFootSprites;
 
         nowIndex = 0;
         leftfoot = !leftfoot;
@@ -105,7 +117,8 @@ public class AnimationControl : MonoBehaviour
 
     public void Walk()
     {
-        if (nowSprites == walkLeftFootSprites || nowSprites == walkRightFootSprites)
+        if (nowSprites == walkLeftFootSprites || nowSprites == walkRightFootSprites 
+            || nowSprites == walkSquatLeftFoot || nowSprites == walkSquatRightFoot)
         {
             //callback = new AnimationHandler(WalkNextFoot);
         }
