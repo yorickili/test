@@ -43,7 +43,7 @@ public class SelectLevel : MonoBehaviour {
 
     private void EnterLevel (int level)
     {
-        SceneManager.LoadScene("level" + level);
+        SceneManager.LoadScene("Level" + level);
     }
 
     private void Back()

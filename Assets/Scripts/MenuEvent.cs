@@ -33,8 +33,7 @@ public class MenuEvent : MonoBehaviour {
             Instantiate(SelectLevelPrefab, this.transform.position, this.transform.rotation);
         }
         else {
-            Instantiate(SelectLevelPrefab, this.transform.position, this.transform.rotation);
-            //SceneManager.LoadScene("level0");
+            SceneManager.LoadScene("Level0");
         }
     }
 
