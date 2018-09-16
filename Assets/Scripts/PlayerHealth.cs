@@ -51,7 +51,7 @@ public class PlayerHealth : MonoBehaviour
     {
         GetComponent<PlayerControl>().Death();
 
-        GetComponent<PlayerControl>().enabled = false;
+        //GetComponent<PlayerControl>().enabled = false;
     }
 
     public void UpdateHealthBar()

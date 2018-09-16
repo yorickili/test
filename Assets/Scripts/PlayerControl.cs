@@ -36,6 +36,7 @@ public class PlayerControl : MonoBehaviour
     private bool isNeonNear = false;
     private int wallJumpCount = 0;
     private string walkDirection = "";
+    private float damageLastTime = 0;
                                             
 
     private PlayerHealth playerHealth;
@@ -82,6 +83,15 @@ public class PlayerControl : MonoBehaviour
             --lastMoving;
 
         cameraFollow.TrackPlayer();
+
+        //take damage
+        if (damageLastTime > 0)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, Mathf.Sin(damageLastTime) / 3 + 0.5f);
+            damageLastTime -= 0.1f;
+            if (damageLastTime <= 0)
+                GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
     }
 
     private bool IsGround()
@@ -236,21 +246,27 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    public void TakeDamage(float delta)
+    public void TakeDamage(float delta, bool alwaysDamage = false)
     {
-        playerHealth.ReduceHealth(delta);
+        if (!alwaysDamage && damageLastTime > 0.0001) return;
+
         if (forward == "right")
             GetComponent<Rigidbody2D>().AddForce(new Vector2(-damageForce, 0f));
         else
             GetComponent<Rigidbody2D>().AddForce(new Vector2(damageForce, 0f));
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, damageForce));
+
+        if (!alwaysDamage)
+            damageLastTime = 2 * 2 * Mathf.PI;
         animationControl.TakeDamage();
+        playerHealth.ReduceHealth(delta);
     }
 
     public void Death()
     {
         animationControl.Die();
         GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 4f);
-        //this.enabled = false;
+        this.enabled = false;
     }
 
     public void Squat()

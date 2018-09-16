@@ -8336,9 +8336,9 @@ MonoBehaviour:
   originSprite:
   - {fileID: 21300000, guid: 462e2aeb840f9426db0be669a787507c, type: 3}
   walkLeftFootSprites:
-  - {fileID: 21300000, guid: 462e2aeb840f9426db0be669a787507c, type: 3}
   - {fileID: 21300000, guid: 7bed469f61afa4332a1a354f9e1836a4, type: 3}
   - {fileID: 21300000, guid: 4939098e0aff349aa9bd06149703ef5a, type: 3}
+  - {fileID: 21300000, guid: cb5f7c55e4b2d4c26871dbf08b5bd323, type: 3}
   walkRightFootSprites:
   - {fileID: 21300000, guid: 596a43e4e5a7a463898884d2a4d764fe, type: 3}
   - {fileID: 21300000, guid: fc3b79ab30a584c659832e4568d5e8b3, type: 3}

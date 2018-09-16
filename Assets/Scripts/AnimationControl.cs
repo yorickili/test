@@ -12,6 +12,7 @@ public class AnimationControl : MonoBehaviour
     public Sprite[] originSquatSprite;
     public Sprite[] walkSquatLeftFoot;
     public Sprite[] walkSquatRightFoot;
+    public Sprite[] takeDamageSprites;
     public Sprite[] deathSprites;
     public Sprite[] jumpUpSprites;
     public Sprite[] jumpDownSprites;
@@ -138,7 +139,9 @@ public class AnimationControl : MonoBehaviour
 
     public void TakeDamage()
     {
-
+        nowSprites = takeDamageSprites;
+        nowIndex = 0;
+        callback = new AnimationHandler(SetOrigin);
     }
 
     public void Die()

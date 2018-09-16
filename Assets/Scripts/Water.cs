@@ -36,7 +36,7 @@ public class Water : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
-            playerControl.TakeDamage(hurtingtime);
+            playerControl.TakeDamage(hurtingtime, true);
         }
     }
 
