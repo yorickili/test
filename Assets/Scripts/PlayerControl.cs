@@ -8,8 +8,12 @@ public class PlayerControl : MonoBehaviour
     public bool facingRight = true;         // For determining which way the player is currently facing.
     [HideInInspector]
     public bool jump = false;               // Condition for whether the player should jump.
+    public bool isSquat = false;
+    public bool haveKey = false;
     public GameObject Wave;
+    private int waveCD = 100;
     public float waveCost = 2f;
+    private int waveLast = 0;
 
     public float moveForce = 365f;          // Amount of force added to move the player left and right.
     public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
@@ -25,16 +29,19 @@ public class PlayerControl : MonoBehaviour
     //private bool grounded = false;          // Whether or not the player is grounded.
     private bool isJumping = false;
     private bool isMoving = false;
+    private int lastMoving = 0;
     //private bool isTiptoeOnGround = false;
     //private bool isHeelOnGround = false;
     private bool isWallNear = false;
     private bool isNeonNear = false;
     private int wallJumpCount = 0;
     private string walkDirection = "";
+    private float damageLastTime = 0;
                                             
 
     private PlayerHealth playerHealth;
     private AnimationControl animationControl;
+    private CameraFollow cameraFollow;
     private string forward = "right";
     
 
@@ -49,6 +56,7 @@ public class PlayerControl : MonoBehaviour
 
     void Start()
     {
+        cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         animationControl = GameObject.FindGameObjectWithTag("AnimationManager").GetComponent<AnimationControl>();
     }
 
@@ -68,6 +76,22 @@ public class PlayerControl : MonoBehaviour
 
         if (isMoving)
             WalkAtUpdate();
+
+        if (waveLast > 0)
+            --waveLast;
+        if (lastMoving > 0)
+            --lastMoving;
+
+        cameraFollow.TrackPlayer();
+
+        //take damage
+        if (damageLastTime > 0)
+        {
+            GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, Mathf.Sin(damageLastTime) / 3 + 0.5f);
+            damageLastTime -= 0.1f;
+            if (damageLastTime <= 0)
+                GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
     }
 
     private bool IsGround()
@@ -105,12 +129,18 @@ public class PlayerControl : MonoBehaviour
 
     public void AddWave()
     {
+        if (waveLast > 0)
+        {
+            return;
+        }
+
         if (playerHealth.nowhealth > waveCost)   //当前电量大于发波所需电量
         {
             Vector3 WavePosition = new Vector3(this.transform.position.x, this.transform.position.y, 6);
             Instantiate(Wave, WavePosition, this.transform.rotation);
             playerHealth.ReduceHealth(waveCost);
-            print("发波后 nowhealth=" + playerHealth.nowhealth);
+
+            waveLast = waveCD;
         }
         else
         {
@@ -133,7 +163,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (IsGround() || IsSlope())
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+            print("isMoving: "+isMoving);
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 100f : 0f)));
             wallJumpCount = 0;
             //animationControl.Jump();
             //isJumping = 5;
@@ -142,7 +173,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (wallJumpCount < 1)
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 100f : 0f)));
                 wallJumpCount += 1;
             }
         }
@@ -152,7 +183,7 @@ public class PlayerControl : MonoBehaviour
     {
         Vector3 dir = new Vector3(5, 0, 0);
 
-        dir = Camera.main.transform.TransformDirection(dir);
+        dir = GameObject.FindGameObjectWithTag("MainCamera").transform.TransformDirection(dir);
 
         dir.y = 0;
 
@@ -207,6 +238,7 @@ public class PlayerControl : MonoBehaviour
     {
         walkDirection = direction;
         isMoving = true;
+        lastMoving = 10;
     }
 
     public void Stop()
@@ -214,30 +246,41 @@ public class PlayerControl : MonoBehaviour
 
     }
 
-    public void TakeDamage(float delta)
+    public void TakeDamage(float delta, bool alwaysDamage = false)
     {
-        playerHealth.ReduceHealth(delta);
+        if (!alwaysDamage && damageLastTime > 0.0001) return;
+
         if (forward == "right")
             GetComponent<Rigidbody2D>().AddForce(new Vector2(-damageForce, 0f));
         else
             GetComponent<Rigidbody2D>().AddForce(new Vector2(damageForce, 0f));
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, damageForce));
+
+        if (!alwaysDamage)
+            damageLastTime = 2 * 2 * Mathf.PI;
         animationControl.TakeDamage();
+        playerHealth.ReduceHealth(delta);
     }
 
     public void Death()
     {
         animationControl.Die();
+        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 4f);
         this.enabled = false;
     }
 
     public void Squat()
     {
-        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 5f);
+        GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.32f, -1.35f);
+        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 13.3f);
+        isSquat = true;
     }
 
     public void Stand()
     {
-        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 14f);
+        GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.32f, -0.17f);
+        GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 15.6f);
+        isSquat = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

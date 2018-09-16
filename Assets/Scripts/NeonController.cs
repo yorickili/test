@@ -5,8 +5,8 @@ using UnityEngine;
 public class NeonController : MonoBehaviour {
 
     public GameObject NeonLight;
-    public float FadeSpeed = 0.005f;
-    public int StayTime = 500;
+    private float ShowSpeed = 0.04f, FadeSpeed = 0.009f;
+    private int StayTime = 100;
 
     //bool isLighting = false;
     float Luminance = 0f, MaxLuminance = 1f;
@@ -15,7 +15,7 @@ public class NeonController : MonoBehaviour {
 
     private void SetColor(Vector4 InColor)
     {
-        //this.GetComponent<SpriteRenderer>().color = InColor;
+        this.GetComponent<SpriteRenderer>().color = InColor;
         NeonLight.GetComponent<SpriteRenderer>().color = InColor;
 
         //Vector3 position = this.transform.position;
@@ -42,13 +42,18 @@ public class NeonController : MonoBehaviour {
         }
         else if (Luminance >= MaxLuminance)
         {
-            Luminance = MaxLuminance - FadeSpeed;
+            Luminance = MaxLuminance - ShowSpeed;
             Step = -1f;
-            Stay = 100;
+            Stay = StayTime;
         }
 
         if (Stay == 0)
-            Luminance += Step * FadeSpeed;
+        {
+            if (Step > 0)
+                Luminance += Step * ShowSpeed;
+            else
+                Luminance += Step * FadeSpeed;
+        }
         else
             Stay -= 1;
 	}

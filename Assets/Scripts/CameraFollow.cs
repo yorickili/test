@@ -3,12 +3,15 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour 
 {
+
 	public float xMargin = 1f;		// Distance in the x axis the player can move before the camera follows.
 	public float yMargin = 1f;		// Distance in the y axis the player can move before the camera follows.
 	public float xSmooth = 8f;		// How smoothly the camera catches up with it's target movement in the x axis.
 	public float ySmooth = 8f;		// How smoothly the camera catches up with it's target movement in the y axis.
-	public Vector2 maxXAndY;		// The maximum x and y coordinates the camera can have.
-	public Vector2 minXAndY;		// The minimum x and y coordinates the camera can have.
+    public Vector4[] parts;
+
+    private Vector2 maxXAndY;       // The maximum x and y coordinates the camera can have.
+    private Vector2 minXAndY;		// The minimum x and y coordinates the camera can have.
 
 
 	static private Transform player;		// Reference to the player's transform.
@@ -19,6 +22,8 @@ public class CameraFollow : MonoBehaviour
     static public float GetScreenHeight() { return height; }
 
     static public Transform GetPlayerTransform() { return player; }
+
+    private bool isStopped = false;
 
     void SetBasicValues()
     {
@@ -43,13 +48,28 @@ public class CameraFollow : MonoBehaviour
 	private void Start()
 	{
         SetBasicValues();
-	}
+        ChangePart(0);
+    }
+
+    public void Stop()
+    {
+        isStopped = true;
+    }
+
+    public void ChangePart(int i)
+    {
+        if (i >= parts.Length) return;
+        maxXAndY = new Vector2(parts[i].x, parts[i].y);
+        minXAndY = new Vector2(parts[i].z, parts[i].w);
+    }
 
 	void Awake ()
 	{
 		// Setting up the reference.
 		player = GameObject.FindGameObjectWithTag("Player").transform;
-	}
+        isStopped = false;
+
+    }
 
 
 	bool CheckXMargin()
@@ -65,14 +85,21 @@ public class CameraFollow : MonoBehaviour
 		return Mathf.Abs(transform.position.y - player.position.y) > yMargin;
 	}
 
+    void ChangeCameraSize()
+    {
+        GetComponent<Camera>().orthographicSize = 11;
+        //GameObject.
+    }
 
-	void FixedUpdate ()
+    /*
+    void FixedUpdate ()
 	{
-		TrackPlayer();
+        if (!isStopped)
+            TrackPlayer();
 	}
+    */
 	
-	
-	void TrackPlayer ()
+	public void TrackPlayer ()
 	{
 		// By default the target x and y coordinates of the camera are it's current x and y coordinates.
 		float targetX = transform.position.x;

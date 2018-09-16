@@ -59,7 +59,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 40.96, y: 17.14}
+    oldSize: {x: 24.4, y: 1.89}
     newSize: {x: 40.96, y: 17.14}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -80,8 +80,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NeonLight: {fileID: 0}
-  FadeSpeed: 0.005
-  StayTime: 500
 --- !u!114 &114945983787504070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,7 +127,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: da0b5931b2e6c0d4b977763bd953786a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cd3c6b4a04dd649e58a8e6b21a3cb0b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

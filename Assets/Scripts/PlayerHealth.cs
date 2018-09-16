@@ -49,9 +49,9 @@ public class PlayerHealth : MonoBehaviour
 
     private void Death()
     {
-        GetComponent<AnimationControl>().Die();
+        GetComponent<PlayerControl>().Death();
 
-        GetComponent<PlayerControl>().enabled = false;
+        //GetComponent<PlayerControl>().enabled = false;
     }
 
     public void UpdateHealthBar()
