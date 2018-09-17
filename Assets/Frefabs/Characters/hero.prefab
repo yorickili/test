@@ -168,7 +168,7 @@ MonoBehaviour:
   isSquat: 0
   haveKey: 0
   Wave: {fileID: 1046082481406118, guid: 137bc9e8a05c24edc8c14abdbd38ce7e, type: 2}
-  waveCost: 2
+  waveCost: 5
   moveForce: 365
   maxSpeed: 5
   jumpForce: 4600
