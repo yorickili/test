@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public float maxhealth = 100f;              //血量阀值
-    public float nowhealth = 60f;               //当前血量,出生时为最大血量值
+    public float nowhealth = 100f;               //当前血量,出生时为最大血量值
 
     private SpriteRenderer healthBar;           // Reference to the sprite renderer of the health bar.
     private Vector3 healthScale;                // The local scale of the health bar initially (with full health).
