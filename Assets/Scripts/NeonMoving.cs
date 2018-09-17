@@ -12,7 +12,7 @@ public class NeonMoving : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        print(gameObject.transform.position.y);
 	}
 	
 	// Update is called once per frame

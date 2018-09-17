@@ -43,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     private AnimationControl animationControl;
     private CameraFollow cameraFollow;
     private string forward = "right";
+    private bool lastJumpFacing = true;
     
 
     void Awake()
@@ -171,7 +172,7 @@ public class PlayerControl : MonoBehaviour
         }
         else if (isWallNear)
         {
-            if (wallJumpCount < 1)
+            if (wallJumpCount < 3)
             {
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 100f : 0f)));
                 wallJumpCount += 1;

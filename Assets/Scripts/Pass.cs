@@ -31,7 +31,7 @@ public class Pass : MonoBehaviour
 
     private void PassThisPart()
     {
-        if (nextPart == -1)
+        if (nextPart < 0)
         {
             PassThisLevel();
         }
@@ -44,5 +44,6 @@ public class Pass : MonoBehaviour
     private void PassThisLevel() 
     {
         //todo
+        PlayerPrefs.SetInt("Level", -nextPart);
     }
 }
