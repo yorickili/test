@@ -21,7 +21,15 @@ public class Switch : MonoBehaviour {
         if (collision.tag == "Box")
         {
             gate.GetComponent<Gate>().Open();
-            this.enabled = false;
+            //this.enabled = false;
         }
     }
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+        if (collision.tag == "Box")
+        {
+            gate.GetComponent<Gate>().Close();
+        }
+	}
 }
