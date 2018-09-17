@@ -21,7 +21,7 @@ public class PlayerControl : MonoBehaviour
     public float jumpForce = 500f;
     public float damageForce = 50f;
 
-
+    public GameObject interLevelBtn;
     //private int tauntIndex;                 // The index of the taunts array indicating the most recent taunt.
     //private Transform groundCheck;          // A position marking where to check if the player is grounded.
 
@@ -43,7 +43,6 @@ public class PlayerControl : MonoBehaviour
     private AnimationControl animationControl;
     private CameraFollow cameraFollow;
     private string forward = "right";
-    private bool lastJumpFacing = true;
     
 
     void Awake()
@@ -172,7 +171,7 @@ public class PlayerControl : MonoBehaviour
         }
         else if (isWallNear)
         {
-            if (wallJumpCount < 3)
+            if (wallJumpCount < 1)
             {
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 100f : 0f)));
                 wallJumpCount += 1;
@@ -268,6 +267,12 @@ public class PlayerControl : MonoBehaviour
         animationControl.Die();
         GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 4f);
         this.enabled = false;
+        if (!interLevelBtn.activeSelf)
+        {
+            // Instantiate(interLevelBtn, transform.position, transform.rotation);
+            interLevelBtn.SetActive(true);
+        }
+
     }
 
     public void Squat()
