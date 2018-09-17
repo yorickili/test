@@ -58,7 +58,8 @@ public class CameraFollow : MonoBehaviour
 
     public void ChangePart(int i)
     {
-        if (i >= parts.Length) return;
+        print("part: " + i);
+        if (i < 0 || i >= parts.Length) return;
         maxXAndY = new Vector2(parts[i].x, parts[i].y);
         minXAndY = new Vector2(parts[i].z, parts[i].w);
     }

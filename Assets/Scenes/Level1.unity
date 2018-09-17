@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - component: {fileID: 31483307}
   m_Layer: 0
-  m_Name: Part3
+  m_Name: Part2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -661,19 +661,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4795958563103454, guid: 75a2f93c6f606844680773fe1fcf289e,
     type: 2}
   m_PrefabInternal: {fileID: 123254639}
---- !u!114 &123254642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 123254640}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552d233e49402416386f3d6b57a2d436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextPart: 0
-  nextEnter: {fileID: 0}
 --- !u!1 &129876537 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1601448563668824, guid: 96df68f2d70e0464cacf14fbcc2badfe,
@@ -8303,7 +8290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1460874360}
   m_Layer: 0
-  m_Name: Part1
+  m_Name: Part0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8385,7 +8372,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 7.9
+      value: 8.13
       objectReference: {fileID: 0}
     - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalPosition.z
@@ -10246,19 +10233,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1810202146094880, guid: 75a2f93c6f606844680773fe1fcf289e,
     type: 2}
   m_PrefabInternal: {fileID: 1649315952}
---- !u!114 &1719490192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1719490189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552d233e49402416386f3d6b57a2d436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextPart: 0
-  nextEnter: {fileID: 0}
 --- !u!1 &1724509545
 GameObject:
   m_ObjectHideFlags: 0
@@ -10388,7 +10362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1727932147}
   m_Layer: 0
-  m_Name: Part2
+  m_Name: Part1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12696,19 +12670,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4795958563103454, guid: 75a2f93c6f606844680773fe1fcf289e,
     type: 2}
   m_PrefabInternal: {fileID: 1034354010}
---- !u!114 &2073732424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2073732422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552d233e49402416386f3d6b57a2d436, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nextPart: 0
-  nextEnter: {fileID: 0}
 --- !u!1001 &2086277981
 Prefab:
   m_ObjectHideFlags: 0

@@ -34,6 +34,7 @@ public class Pass : MonoBehaviour
         if (nextPart < 0)
         {
             PassThisLevel();
+            return;
         }
 
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>().ChangePart(nextPart);
@@ -43,7 +44,9 @@ public class Pass : MonoBehaviour
 
     private void PassThisLevel() 
     {
-        //todo
-        PlayerPrefs.SetInt("Level", -nextPart);
+        //todo next level is -nextpart
+        //PlayerPrefs.SetInt("Level", -nextPart);
+        nextPart *= -1;
+        Application.LoadLevel("Level" + nextPart);
     }
 }
