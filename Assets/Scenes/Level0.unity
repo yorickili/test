@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731196, g: 0.38074002, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -120,44 +120,39 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
+    - target: {fileID: 4031755125123232, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalPosition.x
       value: -13.6
       objectReference: {fileID: 0}
-    - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
+    - target: {fileID: 4031755125123232, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalPosition.y
       value: -6.8
       objectReference: {fileID: 0}
-    - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
+    - target: {fileID: 4031755125123232, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
+    - target: {fileID: 4031755125123232, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
+    - target: {fileID: 4031755125123232, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
+    - target: {fileID: 4031755125123232, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
+    - target: {fileID: 4031755125123232, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4788801315927490, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
+    - target: {fileID: 4031755125123232, guid: 7b2150b8643a3d746bc3b02e8bbcfcad, type: 2}
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114465845735097342, guid: 7b2150b8643a3d746bc3b02e8bbcfcad,
-        type: 2}
-      propertyPath: nowhealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 114839342309499622, guid: 7b2150b8643a3d746bc3b02e8bbcfcad,
+    - target: {fileID: 114050602083269336, guid: 7b2150b8643a3d746bc3b02e8bbcfcad,
         type: 2}
       propertyPath: interLevelBtn
       value: 
@@ -581,7 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552d233e49402416386f3d6b57a2d436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextPart: 1
+  nextPart: -1
   nextEnter: {fileID: 0}
 --- !u!4 &383408733 stripped
 Transform:
@@ -2207,7 +2202,7 @@ MonoBehaviour:
   LightCameraOut: {fileID: 0}
   Pattern: {fileID: 2800000, guid: f688b701ec5454159b6a87fd599cb337, type: 3}
   UserIntensity: 3
-  UserRadius: 90
+  UserRadius: 50
   blurreds: []
 --- !u!114 &1529825650
 MonoBehaviour:

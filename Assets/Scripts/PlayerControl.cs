@@ -214,11 +214,6 @@ public class PlayerControl : MonoBehaviour
             {
                 this.transform.position -= sp;
             }
-
-            if (!isJumping)
-                animationControl.Walk();
-
-            isMoving = false;
         }
         else
         {
@@ -232,6 +227,11 @@ public class PlayerControl : MonoBehaviour
                 this.transform.position += sp;
             }
         }
+
+        if (!isJumping)
+            animationControl.Walk();
+
+        isMoving = false;
     }
 
     public void Walk(string direction)
@@ -279,6 +279,8 @@ public class PlayerControl : MonoBehaviour
     {
         GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.32f, -1.35f);
         GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 13.3f);
+        GetComponent<BoxCollider2D>().offset = new Vector2(2.26f, 0.10f);
+        GetComponent<BoxCollider2D>().size = new Vector2(3.39f, 7.46f);
         isSquat = true;
     }
 
@@ -286,6 +288,8 @@ public class PlayerControl : MonoBehaviour
     {
         GetComponent<CapsuleCollider2D>().offset = new Vector2(-0.32f, -0.17f);
         GetComponent<CapsuleCollider2D>().size = new Vector2(6.4f, 15.6f);
+        GetComponent<BoxCollider2D>().offset = new Vector2(2.26f, 1.18f);
+        GetComponent<BoxCollider2D>().size = new Vector2(3.39f, 9.63f);
         isSquat = false;
     }
 
