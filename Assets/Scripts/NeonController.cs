@@ -15,7 +15,7 @@ public class NeonController : MonoBehaviour {
 
     private void SetColor(Vector4 InColor)
     {
-        if (InColor.w < 0.3f) this.GetComponent<SpriteRenderer>().color = new Vector4(InColor.x, InColor.y, InColor.z, InColor.w + 0.3f);
+        if (InColor.w < 0.4f) this.GetComponent<SpriteRenderer>().color = new Vector4(InColor.x, InColor.y, InColor.z, InColor.w + 0.4f);
         else this.GetComponent<SpriteRenderer>().color = InColor;
         NeonLight.GetComponent<SpriteRenderer>().color = InColor;
 
