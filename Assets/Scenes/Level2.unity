@@ -1479,7 +1479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   yMoving: 1
   xMoving: 0
-  yMinAndMax: {x: 4, y: 6.5}
+  yMinAndMax: {x: 5, y: 6.5}
   xMinAndMax: {x: 0, y: 0}
   ySpeed: 0.01
   xSpeed: 0.01
@@ -10527,7 +10527,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4314846842140256, guid: 96df68f2d70e0464cacf14fbcc2badfe, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.13
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4314846842140256, guid: 96df68f2d70e0464cacf14fbcc2badfe, type: 2}
       propertyPath: m_LocalScale.y
@@ -12514,7 +12514,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4314846842140256, guid: 96df68f2d70e0464cacf14fbcc2badfe, type: 2}
       propertyPath: m_LocalScale.x
-      value: 0.13
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 4314846842140256, guid: 96df68f2d70e0464cacf14fbcc2badfe, type: 2}
       propertyPath: m_LocalScale.y
@@ -14742,6 +14742,10 @@ Prefab:
     - target: {fileID: 4314846842140256, guid: 96df68f2d70e0464cacf14fbcc2badfe, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.3394237
+      objectReference: {fileID: 0}
+    - target: {fileID: 4314846842140256, guid: 96df68f2d70e0464cacf14fbcc2badfe, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96df68f2d70e0464cacf14fbcc2badfe, type: 2}

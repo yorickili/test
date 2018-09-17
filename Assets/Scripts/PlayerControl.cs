@@ -164,7 +164,7 @@ public class PlayerControl : MonoBehaviour
         if (IsGround() || IsSlope())
         {
             print("isMoving: "+isMoving);
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 100f : 0f)));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 1000f : 0f)));
             wallJumpCount = 0;
             //animationControl.Jump();
             //isJumping = 5;
@@ -173,7 +173,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (wallJumpCount < 1)
             {
-                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 100f : 0f)));
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce + (lastMoving>0 ? 1000f : 0f)));
                 wallJumpCount += 1;
             }
         }
@@ -190,7 +190,7 @@ public class PlayerControl : MonoBehaviour
         if (IsUpstair()) 
         {
             dir.y = -10;
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 15f));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 1000f));
 
         }
 
