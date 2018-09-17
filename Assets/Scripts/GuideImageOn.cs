@@ -29,14 +29,12 @@ public class GuideImageOn : MonoBehaviour
                 guideImage.SetActive(true);
                 guideImage.GetComponent<Image>().sprite = image;
                 playerControl.enabled = false;
+                Destroy(this.gameObject);
             }
         }
         else
             print("null object");
 
     }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        Destroy(this.gameObject); 
-    }
+
 }

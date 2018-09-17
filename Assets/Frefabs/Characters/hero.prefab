@@ -242,6 +242,8 @@ MonoBehaviour:
   maxSpeed: 5
   jumpForce: 400
   damageForce: 100
+  interLevelBtn: {fileID: 1865534865977014, guid: b3166c8dbb4963a48a00507de037ac6d,
+    type: 2}
 --- !u!212 &212295800238548752
 SpriteRenderer:
   m_ObjectHideFlags: 1

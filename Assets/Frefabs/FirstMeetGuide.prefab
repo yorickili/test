@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 61685927150039866}
   - component: {fileID: 114278955471447036}
   m_Layer: 11
-  m_Name: FirstMeetBoxGuide
+  m_Name: FirstMeetGuide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,5 +77,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df7408a7bd6fbc4683e1156322d0ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guideImage: {fileID: 1125187043179284, guid: 7da9f7d288e7e114d8a0e841070d7e51, type: 2}
+  guideImage: {fileID: 1926798576299792, guid: b3166c8dbb4963a48a00507de037ac6d, type: 2}
   image: {fileID: 21300000, guid: 6971a73233173458fbb59621601f0edb, type: 3}
