@@ -133,6 +133,7 @@
      <Compile Include="Assets\FrostedGlass\Demo\Scripts\AutoRotate.cs" />
      <Compile Include="Assets\FrostedGlass\Scripts\CommandBufferBlur.cs" />
      <Compile Include="Assets\Scripts\AnimationControl.cs" />
+     <Compile Include="Assets\Scripts\Battery.cs" />
      <Compile Include="Assets\Scripts\btn_offGuideClick.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\FogWeather.cs" />
@@ -150,6 +151,7 @@
      <Compile Include="Assets\Scripts\NeonController.cs" />
      <Compile Include="Assets\Scripts\NeonMoving.cs" />
      <Compile Include="Assets\Scripts\Obstacle.cs" />
+     <Compile Include="Assets\Scripts\OpenSetting.cs" />
      <Compile Include="Assets\Scripts\ParticleWave.cs" />
      <Compile Include="Assets\Scripts\Pass.cs" />
      <Compile Include="Assets\Scripts\PickupSpawner.cs" />
@@ -163,6 +165,7 @@
      <Compile Include="Assets\Scripts\testMove.cs" />
      <Compile Include="Assets\Scripts\Toucher.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
+     <Compile Include="Assets\Scripts\WaveCD.cs" />
      <None Include="Assets\Shaders\Wave.shader" />
      <None Include="Assets\FrostedGlass\Shaders\BlurGlass.shader" />
      <None Include="Assets\FrostedGlass\Shaders\SeparableBlur.shader" />
