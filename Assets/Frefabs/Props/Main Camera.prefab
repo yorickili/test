@@ -367,7 +367,7 @@ MonoBehaviour:
   GlassShader: {fileID: 4800000, guid: 1b382d19d5c513e4ba4e644078d43741, type: 3}
   LightCameraOut: {fileID: 0}
   Pattern: {fileID: 2800000, guid: f688b701ec5454159b6a87fd599cb337, type: 3}
-  UserIntensity: 3
+  UserIntensity: 2
   UserRadius: 50
   blurreds: []
 --- !u!114 &114810777484202234

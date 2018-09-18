@@ -113,7 +113,7 @@
 				float step02 = smoothstep(0.05, 0.5, surfSmooth);
 				float step03 = smoothstep(0.00, 0.05, surfSmooth);
 
-				refraction = lerp(ref03, lerp( lerp( lerp(ref03, ref02, step02), ref01, step01), ref00, step00), step03);
+				refraction = ref01;//lerp(ref03, lerp( lerp( lerp(ref03, ref02, step02), ref01, step01), ref00, step00), step03);
                 //refraction = lerp( lerp( lerp(ref03, ref02, step02), ref01, step01), ref00, step00);
 				
                 float4 light = tex2D(_LightMap, i.uv);

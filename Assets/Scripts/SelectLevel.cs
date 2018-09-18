@@ -10,19 +10,19 @@ public class SelectLevel : MonoBehaviour {
     public GameObject MaskPrefab;
 
     void Start () {
-        CreateButton(new Vector3(243.5f, 375, 0), "SelectLevel/1", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(1));
-        CreateButton(new Vector3(607, 375, 0), "SelectLevel/2", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(2));
-        CreateButton(new Vector3(970.5f, 375, 0), "SelectLevel/3", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(3));
-        CreateButton(new Vector3(1250, 700, 0), "SelectLevel/back", new Vector2(62, 45)).onClick.AddListener(Back);
+        CreateButton(new Vector3(Screen.width * 0.3f, Screen.height * 0.5f, 0), "SelectLevel/1", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(1));
+        CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), "SelectLevel/2", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(2));
+        CreateButton(new Vector3(Screen.width * 0.7f, Screen.height * 0.5f, 0), "SelectLevel/3", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(3));
+        CreateButton(new Vector3(Screen.width * 0.93f, Screen.height * 0.93f, 0), "SelectLevel/back", new Vector2(62, 45)).onClick.AddListener(Back);
         PlayerPrefs.SetInt("level", 1);
         if (PlayerPrefs.GetInt("level") == 1)
         {
-            CreateMask(new Vector3(607, 375, 0));
-            CreateMask(new Vector3(970.5f, 375, 0));
+            CreateMask(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
+            CreateMask(new Vector3(Screen.width * 0.7f, Screen.height * 0.5f, 0));
         }
         else if (PlayerPrefs.GetInt("level") == 2)
         {
-            CreateMask(new Vector3(970.5f, 375, 0));
+            CreateMask(new Vector3(Screen.width * 0.7f, Screen.height * 0.5f, 0));
         }
     }
 

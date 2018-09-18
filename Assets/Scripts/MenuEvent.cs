@@ -12,9 +12,9 @@ public class MenuEvent : MonoBehaviour {
 
     void Start ()
     {
-        CreateButton(new Vector3(667, 525, 0), "Welcome/startbutton", new Vector2(134, 70)).onClick.AddListener(StartGame);
-        CreateButton(new Vector3(667, 375, 0), "Welcome/settingbutton", new Vector2(134, 70)).onClick.AddListener(ShowSetting);
-        CreateButton(new Vector3(667, 225, 0), "Welcome/exitbutton", new Vector2(134, 70)).onClick.AddListener(ExitGame);
+        CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.7f, 0), "Welcome/startbutton", new Vector2(134, 70)).onClick.AddListener(StartGame);
+        CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), "Welcome/settingbutton", new Vector2(134, 70)).onClick.AddListener(ShowSetting);
+        CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.3f, 0), "Welcome/exitbutton", new Vector2(134, 70)).onClick.AddListener(ExitGame);
 
         SetBGM();
     }

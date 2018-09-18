@@ -12,10 +12,10 @@ public class SettingEvent : MonoBehaviour {
 
     private void Start()
     {
-        CreateButton(new Vector3(1250, 660, 0), "Setting/exit", new Vector2(68, 59)).GetComponent<Button>().onClick.AddListener(Exit);
-        CreateButton(new Vector3(866, 475, 0), "Setting/nocheck", new Vector2(60, 59)).GetComponent<Button>().onClick.AddListener(Music);
-        CreateButton(new Vector3(866, 315, 0), "Setting/nocheck", new Vector2(60, 59)).GetComponent<Button>().onClick.AddListener(Sound);
-        CreateButton(new Vector3(667, 150, 0), "Setting/back", new Vector2(286, 55)).GetComponent<Button>().onClick.AddListener(Back);
+        CreateButton(new Vector3(Screen.width - 100, Screen.height - 100, 0), "Setting/exit", new Vector2(68, 59)).GetComponent<Button>().onClick.AddListener(Exit);
+        CreateButton(new Vector3(Screen.width * 2 / 3, Screen.height * 0.62f, 0), "Setting/nocheck", new Vector2(60, 59)).GetComponent<Button>().onClick.AddListener(Music);
+        CreateButton(new Vector3(Screen.width * 2 / 3, Screen.height * 0.421f, 0), "Setting/nocheck", new Vector2(60, 59)).GetComponent<Button>().onClick.AddListener(Sound);
+        CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.2f, 0), "Setting/back", new Vector2(286, 55)).GetComponent<Button>().onClick.AddListener(Back);
         if (PlayerPrefs.GetInt("MusicSwitch") == 1) CreateMusicSwitch();
         if (PlayerPrefs.GetInt("SoundSwitch") == 1) CreateSoundSwitch();
     }
@@ -32,13 +32,13 @@ public class SettingEvent : MonoBehaviour {
 
     private void CreateMusicSwitch ()
     {
-        MusicSwitch = CreateButton(new Vector3(866, 475, 0), "Setting/checked", new Vector2(60, 59));
+        MusicSwitch = CreateButton(new Vector3(Screen.width * 2 / 3, Screen.height * 0.62f, 0), "Setting/checked", new Vector2(60, 59));
         MusicSwitch.GetComponent<Button>().onClick.AddListener(Music);
     }
 
     private void CreateSoundSwitch ()
     {
-        SoundSwitch = CreateButton(new Vector3(866, 315, 0), "Setting/checked", new Vector2(60, 59));
+        SoundSwitch = CreateButton(new Vector3(Screen.width * 2 / 3, Screen.height * 0.421f, 0), "Setting/checked", new Vector2(60, 59));
         SoundSwitch.GetComponent<Button>().onClick.AddListener(Sound);
     }
 

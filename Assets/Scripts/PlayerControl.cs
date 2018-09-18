@@ -153,6 +153,9 @@ public class PlayerControl : MonoBehaviour
 
     public void AddWave()
     {
+        if (!this.enabled)
+            return;
+
         if (!GameObject.Find("WaveUI").GetComponent<WaveCD>().Turn())
             return;
 
@@ -236,7 +239,7 @@ public class PlayerControl : MonoBehaviour
         if (IsUpstair()) 
         {
             dir.y = -10;
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 1000f));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, 800f));
 
         }
 
