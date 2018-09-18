@@ -16,10 +16,13 @@ public class AudioManager : MonoBehaviour {
     public AudioClip changepartAudio;
     public float tauntDelay = 1f;
 
+    private int sound = 1;
+
 	// Use this for initialization
 	void Start () 
     {
-		
+        SetBGM();
+        SetSound();
 	}
 	
 	// Update is called once per frame
@@ -46,6 +49,60 @@ public class AudioManager : MonoBehaviour {
             // Play the new taunt.
             //GetComponent<AudioSource>().clip = neonAudio;
             GetComponent<AudioSource>().Stop();
+        }
+    }
+
+    public void PlaySoundAudio(AudioClip audio, Vector3 position)
+    {
+        if (sound > 0)
+            AudioSource.PlayClipAtPoint(audio, position);
+    }
+
+    public void OpenSound()
+    {
+        sound = 1;
+        PlayerPrefs.SetInt("SoundSwitch", 1);
+    }
+
+    public void CloseSound()
+    {
+        sound = 0;
+        PlayerPrefs.SetInt("SoundSwitch", 0);
+    }
+
+    public void SetSound()
+    {
+        if (PlayerPrefs.GetInt("SoundSwitch") == 0)
+        {
+            sound = 0;
+        }
+        else 
+        {
+            sound = 1;
+        }
+    }
+
+    public void OpenBGM()
+    {
+        PlayerPrefs.SetInt("SoundSwitch", 1);
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = true;
+    }
+
+    public void CloseBGM()
+    {
+        PlayerPrefs.SetInt("SoundSwitch", 0);
+        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
+    }
+
+    public void SetBGM()
+    {
+        if (PlayerPrefs.GetInt("MusicSwitch") == 0)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
+        }
+        else 
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = true;
         }
     }
 }

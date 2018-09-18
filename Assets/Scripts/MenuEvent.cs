@@ -15,6 +15,8 @@ public class MenuEvent : MonoBehaviour {
         CreateButton(new Vector3(667, 525, 0), "Welcome/startbutton", new Vector2(134, 70)).onClick.AddListener(StartGame);
         CreateButton(new Vector3(667, 375, 0), "Welcome/settingbutton", new Vector2(134, 70)).onClick.AddListener(ShowSetting);
         CreateButton(new Vector3(667, 225, 0), "Welcome/exitbutton", new Vector2(134, 70)).onClick.AddListener(ExitGame);
+
+        SetBGM();
     }
 
     private Button CreateButton(Vector3 vector3, string path, Vector2 size)
@@ -45,5 +47,18 @@ public class MenuEvent : MonoBehaviour {
     private void ExitGame()
     {
         Application.Quit();
+    }
+
+    private void SetBGM()
+    {
+        if (PlayerPrefs.GetInt("MusicSwitch") == 0)
+        {
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
+        }
+        else
+        {
+            PlayerPrefs.SetInt("SoundSwitch", 1);
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = true;
+        }
     }
 }

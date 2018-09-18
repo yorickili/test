@@ -16,8 +16,8 @@ public class SettingEvent : MonoBehaviour {
         CreateButton(new Vector3(866, 475, 0), "Setting/nocheck", new Vector2(60, 59)).GetComponent<Button>().onClick.AddListener(Music);
         CreateButton(new Vector3(866, 315, 0), "Setting/nocheck", new Vector2(60, 59)).GetComponent<Button>().onClick.AddListener(Sound);
         CreateButton(new Vector3(667, 150, 0), "Setting/back", new Vector2(286, 55)).GetComponent<Button>().onClick.AddListener(Back);
-        if (PlayerPrefs.GetInt("MusicSwitch") == 0) CreateMusicSwitch();
-        if (PlayerPrefs.GetInt("SoundSwitch") == 0) CreateSoundSwitch();
+        if (PlayerPrefs.GetInt("MusicSwitch") == 1) CreateMusicSwitch();
+        if (PlayerPrefs.GetInt("SoundSwitch") == 1) CreateSoundSwitch();
     }
 
     private GameObject CreateButton(Vector3 vector3, string path, Vector2 size)
@@ -46,13 +46,15 @@ public class SettingEvent : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("MusicSwitch") == 0)
         {
-            Destroy(MusicSwitch);
-            PlayerPrefs.SetInt("MusicSwitch", 1);
+            CreateMusicSwitch();
+            PlayerPrefs.SetInt("MusicSwitch", 1); 
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = true;
         }
         else
         {
-            CreateMusicSwitch();
+            Destroy(MusicSwitch);
             PlayerPrefs.SetInt("MusicSwitch", 0);
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
         }
     }
 
@@ -60,12 +62,12 @@ public class SettingEvent : MonoBehaviour {
     {
         if (PlayerPrefs.GetInt("SoundSwitch") == 0)
         {
-            Destroy(SoundSwitch);
+            CreateSoundSwitch();
             PlayerPrefs.SetInt("SoundSwitch", 1);
         }
         else
         {
-            CreateSoundSwitch();
+            Destroy(SoundSwitch);
             PlayerPrefs.SetInt("SoundSwitch", 0);
         }
     }
