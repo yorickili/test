@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WaveCD : MonoBehaviour {
 
-    public float CD = 10f;
+    public float CD = 30f;
 
     bool isCDing = false;
     float now = 0;
@@ -13,7 +13,6 @@ public class WaveCD : MonoBehaviour {
 
 	void Start () {
         Icon = GetComponent<Image>();
-        Turn();
 	}
 
     void Update()
@@ -31,9 +30,15 @@ public class WaveCD : MonoBehaviour {
         }
     }
 
-    public void Turn ()
+    public bool Turn ()
     {
-        if (!isCDing) isCDing = true;
+        if (!isCDing) {
+            isCDing = true;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
 }

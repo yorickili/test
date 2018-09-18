@@ -9,7 +9,8 @@ public class PlayerHealth : MonoBehaviour
 {
     public float maxhealth = 100f;              //血量阀值
     public float nowhealth = 100f;               //当前血量,出生时为最大血量值
-
+    
+    RectTransform core;
     //private SpriteRenderer healthBar;           // Reference to the sprite renderer of the health bar.
     //private Vector3 healthScale;                // The local scale of the health bar initially (with full health).
     private PlayerControl playerControl;        // Reference to the PlayerControl script.
@@ -22,6 +23,8 @@ public class PlayerHealth : MonoBehaviour
         //healthScale = healthBar.transform.localScale;
 
         Debug.Log("nowhealth" + nowhealth);
+        //Core = gameObject.transform.GetChild(0).GetComponent<RectTransform>();
+        core = GameObject.Find("HealthUICore").GetComponent<RectTransform>();
 
     }
 
@@ -35,16 +38,16 @@ public class PlayerHealth : MonoBehaviour
         nowhealth -= delta;
         if (nowhealth < 0) nowhealth = 0f;
 
-        //UpdateHealthBar();
+        UpdateHealthBar();
         if (nowhealth <= 0) Death();
     }
 
     public void IncreaseHealth(float delta)
     {
         nowhealth += delta;
-        if (nowhealth > maxhealth) maxhealth = nowhealth;
+        if (nowhealth > maxhealth) nowhealth = maxhealth;
 
-        //UpdateHealthBar();
+        UpdateHealthBar();
     }
 
     private void Death()
@@ -54,10 +57,14 @@ public class PlayerHealth : MonoBehaviour
         //GetComponent<PlayerControl>().enabled = false;
     }
 
+    //public void UpdateHealthBar()
+    //{
+    //    //healthBar.material.color = Color.Lerp(Color.green, Color.red, 1 - nowhealth / maxhealth);
+    //    //healthBar.transform.localScale = new Vector3(healthScale.x * (nowhealth / maxhealth), 1, 1);
+    //}
+
     public void UpdateHealthBar()
     {
-        //healthBar.material.color = Color.Lerp(Color.green, Color.red, 1 - nowhealth / maxhealth);
-        //healthBar.transform.localScale = new Vector3(healthScale.x * (nowhealth / maxhealth), 1, 1);
+        core.offsetMax = new Vector2(-(30 + (100 - nowhealth) * 3), -10);
     }
-
 }

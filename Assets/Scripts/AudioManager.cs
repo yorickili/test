@@ -28,8 +28,12 @@ public class AudioManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-		
-	}
+        SetSound();
+        if (sound == 0)
+        {
+            StopNeonAudio();
+        }
+    }
 
     public void PlayNeonAudio()
     {
@@ -54,6 +58,8 @@ public class AudioManager : MonoBehaviour {
 
     public void PlaySoundAudio(AudioClip audio, Vector3 position)
     {
+        SetSound();
+        print("sound: " + sound);
         if (sound > 0)
             AudioSource.PlayClipAtPoint(audio, position);
     }

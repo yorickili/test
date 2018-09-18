@@ -49,5 +49,6 @@ public class Pass : MonoBehaviour
         //PlayerPrefs.SetInt("Level", -nextPart);
         nextPart *= -1;
         Application.LoadLevel("Level" + nextPart);
+        PlayerPrefs.SetInt("Level", nextPart);
     }
 }

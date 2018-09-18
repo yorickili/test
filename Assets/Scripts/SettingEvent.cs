@@ -56,6 +56,8 @@ public class SettingEvent : MonoBehaviour {
             PlayerPrefs.SetInt("MusicSwitch", 0);
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
         }
+
+
     }
 
     private void Sound()
@@ -79,7 +81,7 @@ public class SettingEvent : MonoBehaviour {
 
     private void Back()
     {
-        if (SceneManager.GetActiveScene().name != "Welcome") SceneManager.LoadScene("WelCome");
+        if (SceneManager.GetActiveScene().name != "Welcome") SceneManager.LoadScene("Welcome");
         else Exit();
     }
 }

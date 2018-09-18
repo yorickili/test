@@ -11,9 +11,7 @@ public class PlayerControl : MonoBehaviour
     public bool isSquat = false;
     public bool haveKey = false;
     public GameObject Wave;
-    private int waveCD = 100;
     public float waveCost = 2f;
-    private int waveLast = 0;
 
     public float moveForce = 365f;          // Amount of force added to move the player left and right.
     public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
@@ -71,20 +69,18 @@ public class PlayerControl : MonoBehaviour
         {
             isJumping = false;
             animationControl.Stop();
-            AudioSource.PlayClipAtPoint(audioManager.downAudio, transform.position);
+            audioManager.PlaySoundAudio(audioManager.downAudio, transform.position);
         }
         else if (!isJumping && !isGround)
         {
             isJumping = true;
             animationControl.Jump();
-            AudioSource.PlayClipAtPoint(audioManager.jumpAudio, transform.position);
+            audioManager.PlaySoundAudio(audioManager.jumpAudio, transform.position);
         }
 
         if (isMoving)
             WalkAtUpdate();
 
-        if (waveLast > 0)
-            --waveLast;
         if (lastMoving > 0)
             --lastMoving;
 
@@ -157,37 +153,36 @@ public class PlayerControl : MonoBehaviour
 
     public void AddWave()
     {
-        if (waveLast > 0)
-        {
+        if (!GameObject.Find("WaveUI").GetComponent<WaveCD>().Turn())
             return;
-        }
 
         //if (playerHealth.nowhealth > waveCost)   //当前电量大于发波所需电量
         //{
             Vector3 WavePosition = new Vector3(this.transform.position.x, this.transform.position.y, 6);
             Instantiate(Wave, WavePosition, this.transform.rotation);
+            //GameObject.Find("Battery").GetComponent<Battery>().HandleElectric(-1 * waveCost);
             playerHealth.ReduceHealth(waveCost);
 
-            waveLast = waveCD;
+            //waveLast = waveCD;
         //}
         //else
         //{
         //    print("发波失败 nowhealth=" + playerHealth.nowhealth);
         //}
 
-        AudioSource.PlayClipAtPoint(audioManager.waveAudio, transform.position);
+        audioManager.PlaySoundAudio(audioManager.waveAudio, transform.position);
     }
 
     public void PickUpBattery(float delta)
     {
         playerHealth.IncreaseHealth(delta);
-        AudioSource.PlayClipAtPoint(audioManager.pickupAudio, transform.position);
+        audioManager.PlaySoundAudio(audioManager.pickupAudio, transform.position);
     }
 
     public void PickUpKey()
     {
         haveKey = true;
-        AudioSource.PlayClipAtPoint(audioManager.pickkeyAudio, transform.position);
+        audioManager.PlaySoundAudio(audioManager.pickkeyAudio, transform.position);
     }
 
     public void ChangePart()
@@ -195,7 +190,7 @@ public class PlayerControl : MonoBehaviour
         changePartColor.a = 1;
         //GameObject.FindGameObjectWithTag("Finish").GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
         GameObject.FindGameObjectWithTag("UICamera").GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
-        AudioSource.PlayClipAtPoint(audioManager.changepartAudio, transform.position);
+        audioManager.PlaySoundAudio(audioManager.changepartAudio, transform.position);
     }
 
     void Flip()
