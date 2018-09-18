@@ -104,14 +104,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1347988210762928}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe566d6b61f54bbd887701ca7892a49, type: 3}
+  m_Script: {fileID: 11500000, guid: 2f9c20a8ab2764f75ad8ac4e397ab705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonPrefab: {fileID: 1985827304033680, guid: fdfea21c1930f4e7a9bb006c29acc18d,
+  ButtonPrefab: {fileID: 1985827304033680, guid: e2b97873ceefe40c08fa5d498e603af8,
     type: 2}
-  SettingPrefab: {fileID: 1866312870654772, guid: 31b7917217c2b4264aec9769bee1fcb7,
+  SettingPrefab: {fileID: 1685772853881844, guid: 7c06958488ba14cf9b26618b1c965e90,
     type: 2}
-  SelectLevelPrefab: {fileID: 1261906744184134, guid: e44169719e99f48878a6a8172151f5f8,
+  SelectLevelPrefab: {fileID: 1261906744184134, guid: 5fb84ddb56d6541ee8b3ba47896f3032,
     type: 2}
 --- !u!222 &222191756064394680
 CanvasRenderer:

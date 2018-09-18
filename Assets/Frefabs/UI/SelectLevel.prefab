@@ -83,12 +83,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1261906744184134}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ff183e06caef4f3881a6e943600a202, type: 3}
+  m_Script: {fileID: 11500000, guid: 26e67c5aa6d7342fd9688e96d0015c9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ButtonPrefab: {fileID: 1985827304033680, guid: fdfea21c1930f4e7a9bb006c29acc18d,
+  ButtonPrefab: {fileID: 1985827304033680, guid: e2b97873ceefe40c08fa5d498e603af8,
     type: 2}
-  MaskPrefab: {fileID: 1868966710183680, guid: a7315be5ef16046f0b7c38442cbc52f7, type: 2}
+  MaskPrefab: {fileID: 1868966710183680, guid: 728f10b22167344d4b6a23c2bb5bcb01, type: 2}
 --- !u!114 &114959266832705028
 MonoBehaviour:
   m_ObjectHideFlags: 1
