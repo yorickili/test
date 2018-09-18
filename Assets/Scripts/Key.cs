@@ -19,7 +19,7 @@ public class Key : MonoBehaviour {
 	{
         if (collision.tag == "Player")
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>().haveKey = true;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>().PickUpKey();
             this.gameObject.SetActive(false);
         }
 	}

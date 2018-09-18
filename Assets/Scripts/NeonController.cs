@@ -13,6 +13,8 @@ public class NeonController : MonoBehaviour {
     float Step = 0f;
     int Stay = 0;
 
+    private PlayerControl playerControl;
+
     private void SetColor(Vector4 InColor)
     {
         if (InColor.w < 0.4f) this.GetComponent<SpriteRenderer>().color = new Vector4(InColor.x, InColor.y, InColor.z, InColor.w + 0.4f);
@@ -28,6 +30,7 @@ public class NeonController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         SetColor(new Vector4(0f, 0f, 0f, 0f));
+        playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
         //SetColor(new Vector4(1f, 1f, 1f, 1f));
 	}
 	
@@ -55,15 +58,16 @@ public class NeonController : MonoBehaviour {
             else
                 Luminance += Step * FadeSpeed;
         }
-        else
+        else {
             Stay -= 1;
+        }
 	}
 
     public bool LightUp()
     {
         //SetColor(new Vector4(1, 1, 1, 1));
         Step = 1f;
-
+        playerControl.neonOn = 190;
         return true;
     }
 }

@@ -19,7 +19,9 @@ public class PlayerControl : MonoBehaviour
     public float maxSpeed = 5f;             // The fastest the player can travel in the x axis.
                                             //public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
     public float jumpForce = 500f;
-    public float damageForce = 50f;
+    public float damageForce = 500f;
+
+    public int neonOn = 0;
 
     public GameObject interLevelBtn;
     //private int tauntIndex;                 // The index of the taunts array indicating the most recent taunt.
@@ -41,6 +43,7 @@ public class PlayerControl : MonoBehaviour
 
     private PlayerHealth playerHealth;
     private AnimationControl animationControl;
+    private AudioManager audioManager;
     private CameraFollow cameraFollow;
     private string forward = "right";
     
@@ -58,6 +61,7 @@ public class PlayerControl : MonoBehaviour
     {
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         animationControl = GameObject.FindGameObjectWithTag("AnimationManager").GetComponent<AnimationControl>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
     }
 
     void FixedUpdate()
@@ -91,6 +95,17 @@ public class PlayerControl : MonoBehaviour
             damageLastTime -= 0.1f;
             if (damageLastTime <= 0)
                 GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        }
+
+        //neonON
+        if (neonOn > 0)
+        {
+            audioManager.PlayNeonAudio();
+            neonOn--;
+        }
+        else 
+        {
+            audioManager.StopNeonAudio();
         }
     }
 
@@ -146,6 +161,20 @@ public class PlayerControl : MonoBehaviour
         {
             print("发波失败 nowhealth=" + playerHealth.nowhealth);
         }
+
+        AudioSource.PlayClipAtPoint(audioManager.waveAudio, transform.position);
+    }
+
+    public void PickUpBattery(float delta)
+    {
+        playerHealth.IncreaseHealth(delta);
+        AudioSource.PlayClipAtPoint(audioManager.pickupAudio, transform.position);
+    }
+
+    public void PickUpKey()
+    {
+        haveKey = true;
+        AudioSource.PlayClipAtPoint(audioManager.pickkeyAudio, transform.position);
     }
 
     void Flip()
@@ -161,6 +190,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Jump()
     {
+        if (!this.enabled) return;
         if (IsGround() || IsSlope())
         {
             print("isMoving: "+isMoving);
@@ -251,9 +281,9 @@ public class PlayerControl : MonoBehaviour
         if (!alwaysDamage && damageLastTime > 0.0001) return;
 
         if (forward == "right")
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(-damageForce, 0f));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(-damageForce/2, 0f));
         else
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(damageForce, 0f));
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(damageForce/2, 0f));
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, damageForce));
 
         if (!alwaysDamage)

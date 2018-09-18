@@ -27,8 +27,7 @@ public class HealthPickup : MonoBehaviour
 		if(other.tag == "Player")
 		{
 			// Get a reference to the player health script.
-			PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
-            playerHealth.IncreaseHealth(healthBonus);
+            other.GetComponent<PlayerControl>().PickUpBattery(healthBonus);
 
             // Destroy the crate.
             //Destroy(transform.root.gameObject);

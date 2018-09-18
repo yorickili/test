@@ -26,7 +26,7 @@ public class Water : MonoBehaviour {
 	void Update () {
         if (isPlayerInwater)
         {
-              playerHealth.ReduceHealth(hurtingtime);
+            playerHealth.ReduceHealth(hurtingtime);
             // print("touch water" + playerHealth.nowhealth);
         }
 
@@ -36,7 +36,8 @@ public class Water : MonoBehaviour {
     {
         if(collision.tag == "Player")
         {
-            playerControl.TakeDamage(hurtingtime, true);
+            //playerControl.TakeDamage(hurtingtime, true);
+            playerHealth.ReduceHealth(hurtingtime);
         }
     }
 
