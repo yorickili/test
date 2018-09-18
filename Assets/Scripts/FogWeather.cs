@@ -91,7 +91,7 @@ public class FogWeather : MonoBehaviour
             new Vector2(Screen.width / 8, Screen.height / 8),
         };
 
-        for (int i = 0; i < 4; ++i)
+        for (int i = 0; i < 2; ++i)
         {
             BlurMaterial.SetVector("offsets", new Vector4(2.0f / sizes[i].x, 0, 0, 0));
             if (i == 0)
@@ -111,7 +111,7 @@ public class FogWeather : MonoBehaviour
 
         //GlassMaterial.SetTexture("_MainTex", source);
         //GlassMaterial.SetTexture("_GrabBlurTexture_0", blurreds[0]);
-        GlassMaterial.SetTexture("_FrostTex", Pattern);
+        //GlassMaterial.SetTexture("_FrostTex", Pattern);
         //GlassMaterial.SetVector("_FrostTex_ST", new Vector4(1, 0, 1, 0));
         GlassMaterial.SetTexture("_LightMap", LightCameraOut);
         GlassMaterial.SetVector("_Center", Center);

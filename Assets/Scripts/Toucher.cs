@@ -83,7 +83,7 @@ public class Toucher : MonoBehaviour {
 
     void OnTouchPadTouchUp ()
     {
-        if (!isTouching)
+        if (!isTouching && this.enabled)
         {
             GetComponent<PlayerControl>().AddWave();
         }

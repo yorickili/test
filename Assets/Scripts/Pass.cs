@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Pass : MonoBehaviour
 {
@@ -48,7 +49,8 @@ public class Pass : MonoBehaviour
         //todo next level is -nextpart
         //PlayerPrefs.SetInt("Level", -nextPart);
         nextPart *= -1;
-        Application.LoadLevel("Level" + nextPart);
+        SceneManager.LoadScene("Level" + nextPart);
+
         PlayerPrefs.SetInt("Level", nextPart);
     }
 }

@@ -45,8 +45,8 @@
 
 			sampler2D _GrabBlurTexture_0;
 			sampler2D _GrabBlurTexture_1;
-			sampler2D _GrabBlurTexture_2;
-			sampler2D _GrabBlurTexture_3;
+			//sampler2D _GrabBlurTexture_2;
+			//sampler2D _GrabBlurTexture_3;
 			
             sampler2D _LightMap;
             
@@ -105,8 +105,8 @@
                 */
                 float4 ref00 = tex2D(_GrabBlurTexture_0, i.uv);
                 float4 ref01 = tex2D(_GrabBlurTexture_1, i.uv);
-                float4 ref02 = tex2D(_GrabBlurTexture_2, i.uv);
-                float4 ref03 = tex2D(_GrabBlurTexture_3, i.uv);
+                //float4 ref02 = tex2D(_GrabBlurTexture_2, i.uv);
+                //float4 ref03 = tex2D(_GrabBlurTexture_3, i.uv);
                 
 				float step00 = smoothstep(0.75, 1.00, surfSmooth);
 				float step01 = smoothstep(0.5, 0.75, surfSmooth);
