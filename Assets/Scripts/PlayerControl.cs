@@ -46,7 +46,7 @@ public class PlayerControl : MonoBehaviour
     private AudioManager audioManager;
     private CameraFollow cameraFollow;
     private string forward = "right";
-    
+    private Color changePartColor = new Color(1, 1, 1, 0);
 
     void Awake()
     {
@@ -71,11 +71,13 @@ public class PlayerControl : MonoBehaviour
         {
             isJumping = false;
             animationControl.Stop();
+            AudioSource.PlayClipAtPoint(audioManager.downAudio, transform.position);
         }
         else if (!isJumping && !isGround)
         {
             isJumping = true;
             animationControl.Jump();
+            AudioSource.PlayClipAtPoint(audioManager.jumpAudio, transform.position);
         }
 
         if (isMoving)
@@ -106,6 +108,17 @@ public class PlayerControl : MonoBehaviour
         else 
         {
             audioManager.StopNeonAudio();
+        }
+
+        if (changePartColor.a > 0.01)
+        {
+            changePartColor.a -= 0.01f;
+            if (changePartColor.a < 0.01) 
+            {
+                changePartColor.a = 0;
+                //GameObject.FindGameObjectWithTag("Finish").GetComponent<SpriteRenderer>().color = changePartColor;
+                GameObject.FindGameObjectWithTag("UICamera").GetComponent<Camera>().clearFlags = CameraClearFlags.Nothing;
+            }
         }
     }
 
@@ -149,18 +162,18 @@ public class PlayerControl : MonoBehaviour
             return;
         }
 
-        if (playerHealth.nowhealth > waveCost)   //当前电量大于发波所需电量
-        {
+        //if (playerHealth.nowhealth > waveCost)   //当前电量大于发波所需电量
+        //{
             Vector3 WavePosition = new Vector3(this.transform.position.x, this.transform.position.y, 6);
             Instantiate(Wave, WavePosition, this.transform.rotation);
             playerHealth.ReduceHealth(waveCost);
 
             waveLast = waveCD;
-        }
-        else
-        {
-            print("发波失败 nowhealth=" + playerHealth.nowhealth);
-        }
+        //}
+        //else
+        //{
+        //    print("发波失败 nowhealth=" + playerHealth.nowhealth);
+        //}
 
         AudioSource.PlayClipAtPoint(audioManager.waveAudio, transform.position);
     }
@@ -175,6 +188,14 @@ public class PlayerControl : MonoBehaviour
     {
         haveKey = true;
         AudioSource.PlayClipAtPoint(audioManager.pickkeyAudio, transform.position);
+    }
+
+    public void ChangePart()
+    {
+        changePartColor.a = 1;
+        //GameObject.FindGameObjectWithTag("Finish").GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 1);
+        GameObject.FindGameObjectWithTag("UICamera").GetComponent<Camera>().clearFlags = CameraClearFlags.SolidColor;
+        AudioSource.PlayClipAtPoint(audioManager.changepartAudio, transform.position);
     }
 
     void Flip()

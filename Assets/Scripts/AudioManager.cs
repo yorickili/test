@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour {
 
     public AudioClip jumpAudio;
+    public AudioClip downAudio;
     public AudioClip pickupAudio;
     public AudioClip pickkeyAudio;
     public AudioClip waterAudio;
@@ -12,6 +13,7 @@ public class AudioManager : MonoBehaviour {
     public AudioClip neonAudio;
     public AudioClip deadAudio;
     public AudioClip takedamageAudio;
+    public AudioClip changepartAudio;
     public float tauntDelay = 1f;
 
 	// Use this for initialization

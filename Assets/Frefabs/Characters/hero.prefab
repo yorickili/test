@@ -122,7 +122,7 @@ Rigidbody2D:
   m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -310,8 +310,8 @@ MonoBehaviour:
   waveCost: 5
   moveForce: 365
   maxSpeed: 5
-  jumpForce: 4600
-  damageForce: 1500
+  jumpForce: 3600
+  damageForce: 1000
   neonOn: 0
   interLevelBtn: {fileID: 0}
 --- !u!114 &114571048356758884
@@ -336,7 +336,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88bf312ed44784422bdb8635c0b263bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpAudio: {fileID: 0}
+  jumpAudio: {fileID: 8300000, guid: 2025ea4aceafc40e6839dc33b89aa56a, type: 3}
+  downAudio: {fileID: 8300000, guid: 884490c5ba6ba4f98889327a8757dfe5, type: 3}
   pickupAudio: {fileID: 8300000, guid: 414b8147758a34eea9efd07df9f790b9, type: 3}
   pickkeyAudio: {fileID: 8300000, guid: ce8bbd773c22b487091ac78b87cf13a2, type: 3}
   waterAudio: {fileID: 8300000, guid: b837a6ce862744de6ba6da998880bd24, type: 3}
@@ -344,6 +345,7 @@ MonoBehaviour:
   neonAudio: {fileID: 8300000, guid: 0799bd6bca9494fe5be7ab3a1bfa61da, type: 3}
   deadAudio: {fileID: 8300000, guid: cacd0f4b1b8f44168807a52591a24584, type: 3}
   takedamageAudio: {fileID: 8300000, guid: 06a355325700848f0b9c25d8ee7c94af, type: 3}
+  changepartAudio: {fileID: 8300000, guid: 093f1b4df63104462a65c95935c2bda0, type: 3}
   tauntDelay: 1
 --- !u!114 &114927783588722254
 MonoBehaviour:

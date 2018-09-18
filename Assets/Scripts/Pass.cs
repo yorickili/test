@@ -40,6 +40,7 @@ public class Pass : MonoBehaviour
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>().ChangePart(nextPart);
         GameObject.FindGameObjectWithTag("Player").transform.position = nextEnter.transform.position;
         playerControl.haveKey = false;
+        playerControl.ChangePart();
     }
 
     private void PassThisLevel() 

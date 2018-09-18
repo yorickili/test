@@ -4051,9 +4051,9 @@ Transform:
   - {fileID: 2024680977}
   - {fileID: 234194833}
   - {fileID: 519837041}
-  - {fileID: 1659676810}
   - {fileID: 965301513}
   - {fileID: 1695035307}
+  - {fileID: 1659676810}
   - {fileID: 838051656}
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -4680,7 +4680,7 @@ Transform:
   m_Children:
   - {fileID: 1474035307}
   m_Father: {fileID: 1460874360}
-  m_RootOrder: 7
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1659676811
 CapsuleCollider2D:
@@ -5640,7 +5640,7 @@ GameObject:
   - component: {fileID: 1981041129}
   m_Layer: 5
   m_Name: playerCamera
-  m_TagString: Untagged
+  m_TagString: UICamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5674,7 +5674,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 4
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
