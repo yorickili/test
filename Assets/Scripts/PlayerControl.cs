@@ -46,6 +46,9 @@ public class PlayerControl : MonoBehaviour
     private string forward = "right";
     private Color changePartColor = new Color(1, 1, 1, 0);
 
+    static public int nowPart;
+    public GameObject[] starts;
+
     void Awake()
     {
         //wallCheck = transform.Find("wallCheck");
@@ -60,6 +63,9 @@ public class PlayerControl : MonoBehaviour
         cameraFollow = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraFollow>();
         animationControl = GameObject.FindGameObjectWithTag("AnimationManager").GetComponent<AnimationControl>();
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
+        this.transform.position = starts[nowPart].transform.position;
+        //cameraFollow.ChangePart(nowPart);
     }
 
     void FixedUpdate()

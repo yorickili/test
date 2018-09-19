@@ -32,6 +32,8 @@ public class Pass : MonoBehaviour
 
     private void PassThisPart()
     {
+        PlayerControl.nowPart = 0;
+
         if (nextPart < 0)
         {
             PassThisLevel();
@@ -49,9 +51,13 @@ public class Pass : MonoBehaviour
         //todo next level is -nextpart
         //PlayerPrefs.SetInt("Level", -nextPart);
         nextPart *= -1;
-        SceneManager.LoadScene("Level" + nextPart);
+        if (nextPart > 100)
+            SceneManager.LoadScene("Welcome");
 
-        PlayerPrefs.SetInt("Level", nextPart);
+        else
+            SceneManager.LoadScene("Level" + nextPart);
+
+        PlayerPrefs.SetInt("Level", 3);
         PlayerPrefs.Save();
     }
 }

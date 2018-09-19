@@ -10,11 +10,33 @@ public class SelectLevel : MonoBehaviour {
     public GameObject MaskPrefab;
 
     void Start () {
-        CreateButton(new Vector3(Screen.width * 0.3f, Screen.height * 0.5f, 0), "SelectLevel/1", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(1));
-        CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), "SelectLevel/2", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(2));
-        CreateButton(new Vector3(Screen.width * 0.7f, Screen.height * 0.5f, 0), "SelectLevel/3", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(3));
+        CreateButton(new Vector3(Screen.width * 0.3f, Screen.height * 0.5f, 0), "SelectLevel/1", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(0));
+
+        CreateButton(new Vector3(Screen.width * 0.25f, Screen.height * 0.3f, 0), "SelectLevel/1", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(0));
+        CreateButton(new Vector3(Screen.width * 0.3f, Screen.height * 0.3f, 0), "SelectLevel/2", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(1));
+        CreateButton(new Vector3(Screen.width * 0.35f, Screen.height * 0.3f, 0), "SelectLevel/3", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(2));
+
+
+        CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), "SelectLevel/2", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(3));
+
+        CreateButton(new Vector3(Screen.width * 0.45f, Screen.height * 0.7f, 0), "SelectLevel/1", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(3));
+        CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.7f, 0), "SelectLevel/2", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(4));
+        CreateButton(new Vector3(Screen.width * 0.55f, Screen.height * 0.7f, 0), "SelectLevel/3", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(5));
+
+
+        CreateButton(new Vector3(Screen.width * 0.7f, Screen.height * 0.5f, 0), "SelectLevel/3", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(6));
+
+        CreateButton(new Vector3(Screen.width * 0.65f, Screen.height * 0.3f, 0), "SelectLevel/1", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(6));
+        CreateButton(new Vector3(Screen.width * 0.7f, Screen.height * 0.3f, 0), "SelectLevel/2", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(7));
+        CreateButton(new Vector3(Screen.width * 0.75f, Screen.height * 0.3f, 0), "SelectLevel/3", new Vector2(60, 60)).onClick.AddListener(() => EnterLevel(8));
+
+
         CreateButton(new Vector3(Screen.width * 0.93f, Screen.height * 0.93f, 0), "SelectLevel/back", new Vector2(62, 45)).onClick.AddListener(Back);
 
+        CreateMask(new Vector3(Screen.width * 0.7f, Screen.height * 0.3f, 0));
+        CreateMask(new Vector3(Screen.width * 0.75f, Screen.height * 0.3f, 0));
+
+        /*
         if (PlayerPrefs.GetInt("level") == 1)
         {
             CreateMask(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
@@ -24,6 +46,7 @@ public class SelectLevel : MonoBehaviour {
         {
             CreateMask(new Vector3(Screen.width * 0.7f, Screen.height * 0.5f, 0));
         }
+        */
     }
 
     private Button CreateButton(Vector3 vector3, string path, Vector2 size)
@@ -43,11 +66,12 @@ public class SelectLevel : MonoBehaviour {
 
     private void EnterLevel (int level)
     {
-        //int biglevel = level / 3 + 1;
-        //int smalllevel = level - biglevel * 3;
+        int biglevel = level / 3 + 1;
+        int smalllevel = level - (biglevel-1) * 3;
 
-
-        SceneManager.LoadScene("Level" + level);
+        print("small: " + smalllevel);
+        PlayerControl.nowPart = smalllevel;
+        SceneManager.LoadScene("Level" + biglevel);
     }
 
     private void Back()

@@ -48,7 +48,7 @@ public class CameraFollow : MonoBehaviour
 	private void Start()
 	{
         SetBasicValues();
-        ChangePart(0);
+        ChangePart(PlayerControl.nowPart);
     }
 
     public void Stop()

@@ -25,7 +25,6 @@ public class Continue : MonoBehaviour {
         {
             frame += Time.deltaTime;
             color.a = Mathf.Sin(frame*4) / 3 + 0.5f;
-            print(color);
             image.color = color;
         }
 	}

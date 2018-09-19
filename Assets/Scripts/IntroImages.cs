@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Sprites;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class IntroImages : MonoBehaviour {
 
@@ -99,9 +100,11 @@ public class IntroImages : MonoBehaviour {
             ++guideFrame;
             if (guideFrame == guides.Length)
             {
-                GetComponent<Image>().sprite = bg;
-                GetComponent<MenuEvent>().enabled = true;
-                GameObject.Find("EasyTouchControlsCanvas").SetActive(false);
+                //GetComponent<Image>().sprite = bg;
+                //GetComponent<MenuEvent>().enabled = true;
+                //GameObject.Find("EasyTouchControlsCanvas").SetActive(false);
+                SceneManager.LoadScene("Level0");
+
                 return;
             }
         }
