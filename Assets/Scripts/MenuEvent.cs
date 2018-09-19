@@ -17,6 +17,8 @@ public class MenuEvent : MonoBehaviour {
         CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.3f, 0), "Welcome/exitbutton", new Vector2(134, 70)).onClick.AddListener(ExitGame);
 
         SetBGM();
+        PlayerPrefs.SetInt("level", 3);
+        PlayerPrefs.Save();
     }
 
     private Button CreateButton(Vector3 vector3, string path, Vector2 size)
@@ -51,7 +53,7 @@ public class MenuEvent : MonoBehaviour {
 
     private void SetBGM()
     {
-        if (PlayerPrefs.GetInt("MusicSwitch") == 0)
+        if (PlayerPrefs.GetInt("MusicSwitch") == -1)
         {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
         }

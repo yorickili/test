@@ -52,5 +52,6 @@ public class Pass : MonoBehaviour
         SceneManager.LoadScene("Level" + nextPart);
 
         PlayerPrefs.SetInt("Level", nextPart);
+        PlayerPrefs.Save();
     }
 }

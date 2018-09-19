@@ -14,7 +14,7 @@ public class SelectLevel : MonoBehaviour {
         CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0), "SelectLevel/2", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(2));
         CreateButton(new Vector3(Screen.width * 0.7f, Screen.height * 0.5f, 0), "SelectLevel/3", new Vector2(120, 120)).onClick.AddListener(() => EnterLevel(3));
         CreateButton(new Vector3(Screen.width * 0.93f, Screen.height * 0.93f, 0), "SelectLevel/back", new Vector2(62, 45)).onClick.AddListener(Back);
-        PlayerPrefs.SetInt("level", 1);
+
         if (PlayerPrefs.GetInt("level") == 1)
         {
             CreateMask(new Vector3(Screen.width * 0.5f, Screen.height * 0.5f, 0));
@@ -43,6 +43,10 @@ public class SelectLevel : MonoBehaviour {
 
     private void EnterLevel (int level)
     {
+        //int biglevel = level / 3 + 1;
+        //int smalllevel = level - biglevel * 3;
+
+
         SceneManager.LoadScene("Level" + level);
     }
 

@@ -68,17 +68,19 @@ public class AudioManager : MonoBehaviour {
     {
         sound = 1;
         PlayerPrefs.SetInt("SoundSwitch", 1);
+        PlayerPrefs.Save();
     }
 
     public void CloseSound()
     {
         sound = 0;
-        PlayerPrefs.SetInt("SoundSwitch", 0);
+        PlayerPrefs.SetInt("SoundSwitch", -1);
+        PlayerPrefs.Save();
     }
 
     public void SetSound()
     {
-        if (PlayerPrefs.GetInt("SoundSwitch") == 0)
+        if (PlayerPrefs.GetInt("SoundSwitch") == -1)
         {
             sound = 0;
         }
@@ -92,17 +94,19 @@ public class AudioManager : MonoBehaviour {
     {
         PlayerPrefs.SetInt("SoundSwitch", 1);
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = true;
+        PlayerPrefs.Save();
     }
 
     public void CloseBGM()
     {
-        PlayerPrefs.SetInt("SoundSwitch", 0);
+        PlayerPrefs.SetInt("SoundSwitch", -1);
         GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
+        PlayerPrefs.Save();
     }
 
     public void SetBGM()
     {
-        if (PlayerPrefs.GetInt("MusicSwitch") == 0)
+        if (PlayerPrefs.GetInt("MusicSwitch") == -1)
         {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
         }

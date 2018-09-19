@@ -16,8 +16,8 @@ public class SettingEvent : MonoBehaviour {
         CreateButton(new Vector3(Screen.width * 2 / 3, Screen.height * 0.62f, 0), "Setting/nocheck", new Vector2(60, 59)).GetComponent<Button>().onClick.AddListener(Music);
         CreateButton(new Vector3(Screen.width * 2 / 3, Screen.height * 0.421f, 0), "Setting/nocheck", new Vector2(60, 59)).GetComponent<Button>().onClick.AddListener(Sound);
         CreateButton(new Vector3(Screen.width * 0.5f, Screen.height * 0.2f, 0), "Setting/back", new Vector2(286, 55)).GetComponent<Button>().onClick.AddListener(Back);
-        if (PlayerPrefs.GetInt("MusicSwitch") == 1) CreateMusicSwitch();
-        if (PlayerPrefs.GetInt("SoundSwitch") == 1) CreateSoundSwitch();
+        if (PlayerPrefs.GetInt("MusicSwitch") != -1) CreateMusicSwitch();
+        if (PlayerPrefs.GetInt("SoundSwitch") != -1) CreateSoundSwitch();
     }
 
     private GameObject CreateButton(Vector3 vector3, string path, Vector2 size)
@@ -44,7 +44,7 @@ public class SettingEvent : MonoBehaviour {
 
     private void Music()
     {
-        if (PlayerPrefs.GetInt("MusicSwitch") == 0)
+        if (PlayerPrefs.GetInt("MusicSwitch") == -1)
         {
             CreateMusicSwitch();
             PlayerPrefs.SetInt("MusicSwitch", 1); 
@@ -53,16 +53,16 @@ public class SettingEvent : MonoBehaviour {
         else
         {
             Destroy(MusicSwitch);
-            PlayerPrefs.SetInt("MusicSwitch", 0);
+            PlayerPrefs.SetInt("MusicSwitch", -1);
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>().enabled = false;
         }
 
-
+        PlayerPrefs.Save();
     }
 
     private void Sound()
     {
-        if (PlayerPrefs.GetInt("SoundSwitch") == 0)
+        if (PlayerPrefs.GetInt("SoundSwitch") == -1)
         {
             CreateSoundSwitch();
             PlayerPrefs.SetInt("SoundSwitch", 1);
@@ -70,8 +70,10 @@ public class SettingEvent : MonoBehaviour {
         else
         {
             Destroy(SoundSwitch);
-            PlayerPrefs.SetInt("SoundSwitch", 0);
+            PlayerPrefs.SetInt("SoundSwitch", -1);
         }
+
+        PlayerPrefs.Save();
     }
 
     private void Exit ()
